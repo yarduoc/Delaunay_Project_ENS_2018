@@ -1,15 +1,26 @@
-  type 'a matrix = 'a list list;;
+(*Getters*)
 
+let index l i = (*give the i-eme element of l*)
+  let rec aux l i k = match l with
+    |[] -> failwith "index"
+    |t::q -> if i = k then t else aux l i (k+1);
+
+    in aux l i 0;;
+
+let indice m i j = index (index m i) j;; (* give M[i,j]*)
+
+let rec shape m = match m with
+  |t::q ->  1 + shape q
+  |_ -> 0;;
 
 (*Builders and modifiers*)
 let cr_m33 () =
   let  matrice = ref [] in
-  for k=0 to shape m
+  for k=0 to 3
 
     do let line= ref [] in
-    for l=0 to shape m
-      do if (k !=i && l != j)
-        begin  line := 0::(!line)
+    for l=0 to 3
+      do begin  line := 0::(!line)
         end;
       done;
       matrice := (!line)::(!matrice)
@@ -27,22 +38,6 @@ let replace_list l i x =
 let change i j x matrice  =
   replace_list matrice i (replace_list (index matrice i) j x);;
 
-
-(*Getters*)
-
-let index l i = (*give the i-eme element of l*)
-  let rec aux l i k = match l with
-    |[] -> failwith "index"
-    |t::q -> if i = k then t else aux l i (k+1);
-
-    in aux l i 0;;
-
-let indice m i j = index (index m i) j;; (* give M[i,j]*)
-
-let rec shape m = match m with
-  |t::q ->  1 + shape q
-  |_ -> 0;;
-
 (*Calculus methods*)
 let mineur m  i j = (*give the minor of m develop with M[i,j]*)
   let  mineur_m = ref [] in
@@ -52,12 +47,12 @@ let mineur m  i j = (*give the minor of m develop with M[i,j]*)
     for l=0 to shape m
 
       do if (k !=i && l != j)
-        begin  mini := (indice m k l)::(!mini)
+       then begin  mini := (indice m k l)::(!mini)
         end;
       done;
       mineur_m := (!mini)::(!mineur_m)
     done;
-    (!mineur);;
+    det_2 (!mineur_m);;
 
 
 let det_2 m = (*determinant 2*2 *)
@@ -65,8 +60,8 @@ let det_2 m = (*determinant 2*2 *)
     ;;
 
 let det_3 m = (*determinant 3*3 *)
-  let c_12 = -(mineur m 1 2)in
+  let c_12 = -.(mineur m 1 2)in
   let c_22 = (mineur m 2 2)in
-  let c_32 = - (mineur m 3 2)in
+  let c_32 = -. (mineur m 3 2)in
   (indice m 1 2)*.c_12 +. (indice m 2 2)*.c_22 +. (indice m 3 2)*.c_32
   ;;
