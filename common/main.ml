@@ -6,28 +6,28 @@ type triangle = { p1 : point; p2 : point ; p3 : point};;
 type point_set = point list;;
 type triangle_set = triangle list;;
 
-#use "Graphic/display.ml"
-
 let make_triangle a b c = {p1 = a; p2 = b; p3 = c};;
 let make_point a b = {x = a; y = b};;
 
+#use "common/alphaset.ml";;
+#use "Graphic/display.ml"
+#use "Detection/matrix.ml"
+#use "Detection/detec.ml"
+#use "Change/changement.ml"
+
+
 (* Functions yet to be imported or implemented *)
-let add_point (t:triangle_set) (p:point) = t;;
 let sleep k = let x = k + 1 in print_int x;;
-let copy (t:point_set) = t;;
-let cdr (t:point_set) = ((List.tl t):point_set);;
-let car (t:point_set) = (List.hd t);;
-let is_empty (t:point_set) = (t = []);;
 
 (* Random function *)
 
 let rand_points nb x_max y_max =
     let sortie = ref [] in
     for k=0 to nb do
-        sortie := {x = Random.int(x_max); y = Random.int(y_max)}::(!sortie)
+        sortie := {x = Random.float(x_max); y = Random.float(y_max)}::(!sortie)
     done;
-
-
+    !sortie
+;;
 
 (* Triangle set initialisation with the frame triangles *)
 
@@ -46,7 +46,7 @@ let delaunay point_set max_x max_y =
     let t_set = ref (init_triangle_set max_x max_y) in
     let p_set = ref (copy point_set) in
     while not (is_empty !p_set) do
-        let curr_point = List.hd !p_set in
+        let curr_point = car !p_set in
         t_set := add_point !t_set curr_point;
         p_set := cdr !p_set
     done;

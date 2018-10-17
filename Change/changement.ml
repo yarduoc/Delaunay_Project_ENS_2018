@@ -1,6 +1,3 @@
-#use "common/main.ml"
-#use "common/alphaset.ml"
-#use "Detection/detec.ml"
 
 let get_line (tri_set:triangle_set) =
     let result_line_set = ref (empty()) in
@@ -29,10 +26,8 @@ let border_aux (line_set:(point*point) set) =
 
 let border tri_set = border_aux (get_line tri_set);;
 
-let add_point tri_set new_point = 2;;
-
 let add_point tri_set new_point =
-    let cur_tri_set = to_modify_tri tri_set new_point in
+    let curr_tri_set = to_modify_tri tri_set new_point in
     let new_border = border curr_tri_set in
     let result_tri_set = ref (empty()) in
     let add_tri_aux curr_line =

@@ -8,3 +8,4 @@ val find : 'a list -> 'a -> bool
 val suppress : 'a list ref -> 'a -> unit
 val iter : ('a -> 'b) -> 'a list -> unit
 val is_empty : 'a list -> bool
+val copy : 'a list -> 'a list
