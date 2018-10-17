@@ -14,14 +14,14 @@ let border line_set =
     let sup_set_line = ref empty() in
     let result_set_line = ref line_set in
     let find_aux cur_line =
-        if  not (find cur_line sup_set_line) then
-            if find cur_line ots_set_line then
+        if  not (find !sup_set_line cur_line) then
+            if find cur_line !ots_set_line then
                 sup_set_line := cur_line::(!sup_set_line);
-        if not(find cur_line ots_set_line) then
+        if not (find !ots_set_line cur_line) then
             ots_set_line := cur_line::(!sup_set_line);
     in iter find_aux line_set;
     let sup_aux cur_line =
-        if find sup_set_line cur_line then
+        if find !sup_set_line cur_line then
             suppress result_set_line cur_line
     in iter sup_aux result_set_line;
     result_set_line;;
