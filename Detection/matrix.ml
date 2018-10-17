@@ -1,4 +1,4 @@
-type 'a matrix = 'a list list;;
+  type 'a matrix = 'a list list;;
 
 
 (*Builders and modifiers*)
@@ -8,7 +8,6 @@ let cr_m33 () =
 
     do let line= ref [] in
     for l=0 to shape m
-
       do if (k !=i && l != j)
         begin  line := 0::(!line)
         end;
@@ -25,7 +24,7 @@ let replace_list l i x =
                 else t::(aux l i x (k+1))
   in aux l i x 0;;
 
-let change matrice i j x =
+let change i j x matrice  =
   replace_list matrice i (replace_list (index matrice i) j x);;
 
 
