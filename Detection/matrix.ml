@@ -9,7 +9,7 @@ let index l i = (*give the i-eme element of l*)
 
 let indice m i j = index (index m i) j;; (* give M[i,j]*)
 
-let rec shape m = match m with
+let rec shape m = match m with 
   |t::q ->  1 + shape q
   |_ -> 0;;
 
@@ -26,7 +26,7 @@ let mineur m  i j = (*give the minor of m develop with M[i,j]*)
       done;
       mineur_m := (!mini)::(!mineur_m)
     done;
-    (!mineur);; 
+    (!mineur);;
 
 
 let det_2 m =
