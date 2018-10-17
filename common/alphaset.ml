@@ -16,10 +16,12 @@ let rec find l x = match l with
 | h::_ when h = x -> true
 | _::t -> find t x ;;
 
-let rec suppress l x = match !l with
-| [] -> ()
-| h::t when h = x -> l := suppress t x
-| h::t -> l := h :: (suppress t x);;
+let rec suppress refl x =
+    let rec suppress_aux l = match l with
+        | [] -> []
+        | h::t when h = x -> suppress_aux t
+        | h::t -> h :: (suppress_aux t)
+    in refl := suppress_aux (!refl);;
 
 let rec iter f l = match l with
 | [] -> ()
