@@ -1,5 +1,3 @@
-
-
 let is_counterclockwise (p1:point) (p2:point) (p3:point) =  (*Is correct*)
   let det = (p2.x-.p1.x)*.(p3.y-.p1.y) -. (p2.y -. p1.y)*.(p3.x-.p1.x) in
     det >= 0.
@@ -42,4 +40,4 @@ let to_modify_tri (tri_set:triangle set) (curr_point:point) =
         if in_circle tri p
         then tri_list := tri::(!tri_list)
     in iter (apply curr_point) tri_set;
-    (!tri_list);;
+  (!tri_list);;

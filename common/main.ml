@@ -23,7 +23,7 @@ let sleep k = let x = k + 1 in print_int x;;
 
 let rand_points nb x_max y_max =
     let sortie = ref [] in
-    for k=0 to nb do
+    for k=0 to nb-1 do
         sortie := {x = Random.float(x_max); y = Random.float(y_max)}::(!sortie)
     done;
     !sortie
@@ -36,9 +36,10 @@ let init_triangle_set max_x max_y =
     let p2_max = {x = 0.; y = float_of_int max_y} in
     let p3_max = {x = float_of_int max_x; y = 0.} in
     let p4_max = {x = float_of_int max_x; y = float_of_int max_y} in
-    let t_set = [ { p1 = p1_max; p2 = p2_max; p3 = p3_max};
+    let t_set =   cons
+                  (cons (empty()) {p1 = p1_max; p2 = p2_max; p3 = p3_max})
                   { p1 = p3_max; p2 = p2_max; p3 = p4_max}
-                ]
+
     in t_set
 ;;
 
