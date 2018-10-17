@@ -14,7 +14,19 @@ let rec shape m = match m with
   |_ -> 0;;
 
 let mineur m  i j = (*give the minor of m develop with M[i,j]*)
-  
+  let  mineur_m = ref [] in
+  for k=0 to shape m
+
+    do let mini = ref [] in
+    for l=0 to shape m
+
+      do if (k !=i && l != j)
+        begin  mini := (indice m k l)::(!mini)
+        end;
+      done;
+      mineur_m := (!mini)::(!mineur_m)
+    done;
+    (!mineur);; 
 
 
 let det_2 m =
