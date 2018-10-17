@@ -1,3 +1,5 @@
+#use "../common/alphaset.ml"
+
 let screen_width = ref 800;;
 let screen_height = ref 600;;
 
@@ -14,10 +16,6 @@ let make_point a b = {x = a; y = b};;
 (* Functions yet to be imported or implemented *)
 let add_point (t:triangle_set) (p:point) = t;;
 let sleep k = let x = k + 1 in print_int x;;
-let copy (t:point_set) = t;;
-let cdr (t:point_set) = ((List.tl t):point_set);;
-let car (t:point_set) = (List.hd t);;
-let is_empty (t:point_set) = (t = []);;
 
 (* Triangle set initialisation with the frame triangles *)
 
@@ -36,7 +34,7 @@ let delaunay point_set max_x max_y =
     let t_set = ref (init_triangle_set max_x max_y) in
     let p_set = ref (copy point_set) in
     while not (is_empty !p_set) do
-        let curr_point = List.hd !p_set in
+        let curr_point = car !p_set in
         t_set := add_point !t_set curr_point;
         p_set := cdr !p_set
     done;
@@ -51,6 +49,7 @@ let delaunay_stepwise point_set max_x max_y=
         let curr_point = car !p_set in
         t_set := add_point (!t_set) curr_point;
         p_set := cdr !p_set;
+        clear_graph ();
         draw_triangle !(t_set);
         draw_point point_set;
         sleep 1;

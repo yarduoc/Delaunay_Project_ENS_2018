@@ -4,7 +4,6 @@ let empty() = [];;
 
 let cons l x = x::l;;
 
-
 let car l = List.hd l;;
 
 let cdr l = List.tl l;;
@@ -28,3 +27,5 @@ let rec iter f l = match l with
 | h::t -> (f(h) ; iter f t);;
 
 let is_empty l = l = [];;
+
+let copy l = l;;
