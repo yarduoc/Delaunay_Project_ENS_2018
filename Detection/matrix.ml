@@ -34,7 +34,7 @@ let mineur m i j = (*give the minor of m develop with M[i,j]*)
 
 
 
-let det_3 m = (*determinant 3*3 *)
+let det_3 m = (*determinant 3*3 *)  (*is correct*)
   let c_01 = -.(mineur m 0 1)in
   let c_11 = (mineur m 1 1)in
   let c_21 = -. (mineur m 2 1)in
