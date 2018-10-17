@@ -38,7 +38,7 @@ let in_circle (tri:triangle) (curr_point:point) =
   ;;
 
 
-let to_modify_tri (tri_set:triangle_set) (curr_point:point) =
+let to_modify_tri (tri_set:triangle set) (curr_point:point) =
   let tri_list = ref [] in
   let apply p tri =
         if in_circle tri p
