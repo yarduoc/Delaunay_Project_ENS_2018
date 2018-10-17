@@ -1,5 +1,7 @@
 type 'a matrix = 'a list list;;
 
+
+(*Builders and modifiers*)
 let cr_m33 () =
   let  matrice = ref [] in
   for k=0 to shape m
@@ -26,6 +28,9 @@ let replace_list l i x =
 let change matrice i j x =
   replace_list matrice i (replace_list (index matrice i) j x);;
 
+
+(*Getters*)
+
 let index l i = (*give the i-eme element of l*)
   let rec aux l i k = match l with
     |[] -> failwith "index"
@@ -39,6 +44,7 @@ let rec shape m = match m with
   |t::q ->  1 + shape q
   |_ -> 0;;
 
+(*Calculus methods*)
 let mineur m  i j = (*give the minor of m develop with M[i,j]*)
   let  mineur_m = ref [] in
   for k=0 to shape m
