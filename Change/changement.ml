@@ -9,7 +9,7 @@ let get_line tri_set =
     in iter add_line tri_set;;
 
 
-let border line_set =
+let border_aux line_set =
     let ots_set_line = ref empty() in
     let sup_set_line = ref empty() in
     let result_set_line = ref line_set in
@@ -26,6 +26,7 @@ let border line_set =
     in iter sup_aux result_set_line;
     result_set_line;;
 
+let border tri_set = border_aux (get_line tri_set);;
 
 
 
