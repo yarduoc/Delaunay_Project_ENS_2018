@@ -3,7 +3,7 @@ let cr_m33 () = Array.make_matrix 3 3 0. ;;
 
 (*Getters*)
 
-let indice m i j = m.(1).(j);; (* give M[i,j]*)
+let indice m i j = m.(i).(j);; (* give M[i,j]*)
 
 let rec shape m = Array.length  m
 
@@ -20,7 +20,7 @@ let mineur m i j = (*give the minor of m develop with M[i,j]*)
     for l=0 to 2 do
       if (k !=i && l != j && !a < 2 )
        then begin minor.(!b).(!a) <-  m.(k).(l);
-          a:= 1 + (!a); print_int (!a)
+          a:= 1 + (!a)
             end;
       done;
       if (k !=i && !b < 2)
@@ -30,14 +30,13 @@ let mineur m i j = (*give the minor of m develop with M[i,j]*)
               end;
 
     done;
-    print_string "det";
     det_2 minor;;
 
 
 
 let det_3 m = (*determinant 3*3 *)
-  let c_12 = -.(mineur m 0 1)in
-  let c_22 = (mineur m 1 1)in
-  let c_32 = -. (mineur m 2 1)in
-  (indice m 1 2)*.c_12 +. (indice m 2 2)*.c_22 +. (indice m 3 2)*.c_32
+  let c_01 = -.(mineur m 0 1)in
+  let c_11 = (mineur m 1 1)in
+  let c_21 = -. (mineur m 2 1)in
+  (indice m 0 1)*.c_01 +. (indice m 1 1)*.c_11 +. (indice m 2 1)*.c_21
   ;;
