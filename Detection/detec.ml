@@ -1,3 +1,4 @@
+#use "../common/alphaset.ml";;
 #use "../common/main.ml";;
 #use "matrix.ml"
 
@@ -36,4 +37,5 @@ let in_circle (t:triangle) (curr_point:point) =
     else det < 0.
   ;;
 
-let to_modify_t (t_set:triangle_set) (curr_point:point) = t_set;;
+let to_modify_t (t_set:triangle_set) (curr_point:point) =
+  let 
