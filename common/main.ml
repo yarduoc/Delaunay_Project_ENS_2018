@@ -1,5 +1,5 @@
-SCREEN_WIDTH = 800
-SCREEN_HEIGHT = 600
+let screen_width = 800;;
+let screen_height = 600;;
 
 type point = {x: float; y: float};;
 type triangle = { p1 : point; p2 : point ; p3 : point};;
