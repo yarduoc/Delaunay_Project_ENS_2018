@@ -5,7 +5,6 @@ open Graphics
 
 let width  = ref 0;;
 let height = ref 0;;
-let update_counter = ref 0;;
 
 
 (* Data conversion functions for Graphics compatibility *)
@@ -22,7 +21,7 @@ let triangle_to_int_array triangle =
    point_to_int_double triangle.p3
 |];;
 
-(* Data plotting function *)
+(* Data plotting from int couples *)
 
 let plot_d double_i = match double_i with
     | i1,i2 -> plot i1 i2;;
