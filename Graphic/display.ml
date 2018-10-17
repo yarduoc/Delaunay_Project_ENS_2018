@@ -2,18 +2,17 @@
 open Graphics
 #use "../common/main.ml"
 
-(*
-type int_point = {i_x: int; i_y: int};;
-type int_triangle = { i_p1 : int_point; i_p2 : int_point ; i_p3 : int_point};;
+(* Global variables of the display module*)
 
-let point_to_int_point po = { i_x = (int_of_float po.x);
-                                 i_y = (int_of_float po.y)
-                               };;
+let width  = ref 0;;
+let height = ref 0;;
+let update_counter = ref 0;;
+let points = ref [];;
+let triangles = ref [];;
 
-let triangle_to_int_triangle triangle = { i_p1 = point_to_int_point triangle.p1;
-                                          i_p2 = point_to_int_point triangle.p2;
-                                          i_p3 = point_to_int_point triangle.p3;
-                                        };; *)
+
+(* Data conversion functions for Graphics compatibility *)
+
 
 let point_to_int_double point = ( (int_of_float point.x),
                                   (int_of_float point.y)
@@ -24,8 +23,13 @@ let triangle_to_int_array triangle = [| point_to_int_double triangle.p1;
                                         point_to_int_double triangle.p3
                                      |];;
 
+(* Data plotting function *)
+
 let plot_d double_i = match double_i with
     | i1,i2 -> plot i1 i2;;
+
+let delaunay_step () =
+
 
 let init_graph width height =
     let param_string = " " ^ (string_of_int width) ^ "x" in
