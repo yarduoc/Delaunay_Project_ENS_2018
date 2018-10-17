@@ -35,3 +35,5 @@ let in_circle (t:triangle) (curr_point:point) =
     then det > 0.
     else det < 0.
   ;;
+
+let to_modify_t (t_set:triangle_set) (curr_point:point) = t_set;;
