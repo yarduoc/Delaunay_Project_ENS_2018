@@ -1,6 +1,5 @@
 #load "graphics.cma"
 open Graphics
-#use "../common/main.ml"
 
 (* Global variables of the display module*)
 
@@ -12,14 +11,16 @@ let update_counter = ref 0;;
 (* Data conversion functions for Graphics compatibility *)
 
 
-let point_to_int_double point = ( (int_of_float point.x),
-                                  (int_of_float point.y)
-                                );;
+let point_to_int_double point =
+( (int_of_float point.x),
+  (int_of_float point.y)
+);;
 
-let triangle_to_int_array triangle = [| point_to_int_double triangle.p1;
-                                        point_to_int_double triangle.p2;
-                                        point_to_int_double triangle.p3
-                                     |];;
+let triangle_to_int_array triangle =
+[| point_to_int_double triangle.p1;
+   point_to_int_double triangle.p2;
+   point_to_int_double triangle.p3
+|];;
 
 (* Data plotting function *)
 
