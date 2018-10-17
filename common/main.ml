@@ -19,6 +19,16 @@ let cdr (t:point_set) = ((List.tl t):point_set);;
 let car (t:point_set) = (List.hd t);;
 let is_empty (t:point_set) = (t = []);;
 
+(* Random function *)
+
+let rand_points nb x_max y_max =
+    let sortie = ref [] in
+    for k=0 to nb do
+        sortie := {x = Random.int(x_max); y = Random.int(y_max)}::(!sortie)
+    done;
+
+
+
 (* Triangle set initialisation with the frame triangles *)
 
 let init_triangle_set max_x max_y =
