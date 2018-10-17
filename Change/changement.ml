@@ -1,9 +1,11 @@
 
 #load "set.cma";;
 open Set;;
+#use "main.ml"
+#use "common/alphaset.ml"
 
 let get_line tri_set =
-    let result_line_set = ref empty() in
+    let result_line_set = ref (empty()) in
     let add_line cur_tri =
         result_line_set := cur_tri.p1 :: cur_tri.p2 :: cur_tri.p3 :: (!result_line_set)
     in iter add_line tri_set;;
@@ -28,7 +30,4 @@ let border_aux line_set =
 
 let border tri_set = border_aux (get_line tri_set);;
 
-
-
-
-let add_point tri_set new_point =
+let add_point tri_set new_point = 2;;
