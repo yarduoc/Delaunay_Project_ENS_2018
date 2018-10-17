@@ -8,6 +8,9 @@ type triangle_set = triangle list;;
 
 #use "Graphic/display.ml"
 
+let make_triangle a b c = {p1 = a; p2 = b; p3 = c};;
+let make_point a b = {x = a; y = b};;
+
 (* Functions yet to be imported or implemented *)
 let add_point (t:triangle_set) (p:point) = t;;
 let sleep k = let x = k + 1 in print_int x;;
