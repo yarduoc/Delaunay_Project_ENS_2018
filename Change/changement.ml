@@ -1,3 +1,5 @@
+let double_find set p = let p1,p2 = p in (find set p || find set (p2,p1)) ;;
+
 
 let get_line (tri_set:triangle_set) =
     let result_line_set = ref (empty()) in
@@ -11,14 +13,14 @@ let border_aux (line_set:(point*point) set) =
     let suppr_line_set = ref (empty()) in
     let result_line_set = ref line_set in
     let find_aux curr_line =
-        if  not (find !suppr_line_set curr_line) then
-            if find !seen_line_set curr_line then
+        if  not (double_find !suppr_line_set curr_line) then
+            if double_find !seen_line_set curr_line then
                 suppr_line_set := curr_line::(!suppr_line_set);
-        if not (find !seen_line_set curr_line) then
+        if not (double_find !seen_line_set curr_line) then
             seen_line_set := curr_line::(!seen_line_set);
     in iter find_aux line_set;
     let suppr_aux curr_line =
-        if find !suppr_line_set curr_line then
+        if double_find !suppr_line_set curr_line then
             suppress result_line_set curr_line
     in iter suppr_aux !result_line_set;
     !result_line_set
@@ -35,5 +37,6 @@ let add_point tri_set new_point =
         let new_tri = make_triangle p1 p2 new_point in
         result_tri_set := new_tri::(!result_tri_set)
     in
-    iter add_tri_aux new_border;;
+    iter add_tri_aux new_border;
+    !result_tri_set
 ;;
