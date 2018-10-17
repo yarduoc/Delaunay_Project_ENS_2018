@@ -1,5 +1,6 @@
 #use "common/main.ml"
 #use "common/alphaset.ml"
+#use "Detection/detec.ml"
 
 let get_line (tri_set:triangle_set) =
     let result_line_set = ref (empty()) in
