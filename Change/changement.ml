@@ -1,4 +1,4 @@
-#use "Change/main.ml"
+#use "common/main.ml"
 #use "common/alphaset.ml"
 
 let get_line tri_set =
