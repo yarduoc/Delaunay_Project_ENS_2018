@@ -49,12 +49,3 @@ let det_3 matrix = (*determinant 3*3 *)
   (indice matrix 0 1)*.c_01 +. (indice matrix 1 1)
   *. c_11 +. (indice matrix 2 1)*.c_21
   ;;
-
-let rec puissance a n = if n= 0 then 1
-    else a*.(puissance a (n-1));;
-
-let det_4 m =
-  let sum = ref 0 in let j = 3 in
-    for i=0 to 3
-      do sum := (!sum) +. ((puissance (-1.) (i+j)) *. (det_3 (get_minor m i j)) done
-  (!sum);;
