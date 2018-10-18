@@ -1,5 +1,6 @@
 #load "graphics.cma";;
-#load "BastideCoudrayDesauw.cma";;
+#load "tools.cma";;
+#load "uppertools.cma";;
 
 open Graphics;;
 open Alphaset;;

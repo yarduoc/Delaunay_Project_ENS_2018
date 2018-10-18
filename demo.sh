@@ -37,6 +37,7 @@ ocamlc -c -I Compilables -o Compilables/changement.cmo Change/changement.ml
 
 echo changement OK
 
-ocamlc -a Compilables/pointtriangle.cmo  Compilables/matrix.cmo Compilables/alphaset.cmo Compilables/display.cmo Compilables/detec.cmo Compilables/changement.cmo -o common/BastideCoudrayDesauw.cma
+ocamlc -a Compilables/pointtriangle.cmo Compilables/matrix.cmo Compilables/alphaset.cmo Compilables/detec.cmo -o common/tools.cma
+ocamlc -a Compilables/display.cmo  Compilables/changement.cmo -o common/uppertools.cma
 
 ocaml common/main.ml
