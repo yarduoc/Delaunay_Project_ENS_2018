@@ -47,22 +47,24 @@ let to_modify_tri (tri_set:triangle set) (curr_point:point) =
 let next tri_set tri =
   let tri_list = ref [tri] in
   let apply tri curr_triangle =
-    let have_common_arc = ((tri.p1 = curr_triangle.p1) && ((tri.p2= curr_triangle.p2)||(tri.p2 = curr_triangle.p3)||(tri.p3= curr_triangle.p2)||(tri.p3 = curr_triangle.p3)) ||
-                          ((tri.p1= curr_triangle.p2) && ((tri.p2= curr_triangle.p1)||(tri.p2 = curr_triangle.p3)||(tri.p3= curr_triangle.p1)||(tri.p3 = curr_triangle.p3)) ||
-                          ((tri.p1 = curr_triangle.p3)&& ((tri.p2= curr_triangle.p1)||(tri.p2 = curr_triangle.p2)||(tri.p3= curr_triangle.p1)||(tri.p3 = curr_triangle.p2))||
-                          ((tri.p2 = curr_triangle.p1) && ((tri.p1= curr_triangle.p2)||(tri.p1 = curr_triangle.p3)||(tri.p3= curr_triangle.p2)||(tri.p3 = curr_triangle.p3)) ||
-                          ((tri.p2= curr_triangle.p2) && ((tri.p1= curr_triangle.p1)||(tri.p1 = curr_triangle.p3)||(tri.p3= curr_triangle.p1)||(tri.p3 = curr_triangle.p3)) ||
-                          ((tri.p2 = curr_triangle.p3)&& ((tri.p1= curr_triangle.p1)||(tri.p1 = curr_triangle.p2)||(tri.p3= curr_triangle.p1)||(tri.p3 = curr_triangle.p2))||
-                          ((tri.p3 = curr_triangle.p1) && ((tri.p2= curr_triangle.p2)||(tri.p2 = curr_triangle.p3)||(tri.p1= curr_triangle.p2)||(tri.p1 = curr_triangle.p3)) ||
-                          ((tri.p3= curr_triangle.p2) && ((tri.p2= curr_triangle.p1)||(tri.p2 = curr_triangle.p3)||(tri.p1= curr_triangle.p1)||(tri.p1 = curr_triangle.p3)) ||
-                          ((tri.p3 = curr_triangle.p3)&& ((tri.p2= curr_triangle.p1)||(tri.p2 = curr_triangle.p2)||(tri.p1= curr_triangle.p1)||(tri.p1 = curr_triangle.p2)) in
+    let have_common_arc = ((tri.p1 = curr_triangle.p1) && ((tri.p2= curr_triangle.p2)||(tri.p2 = curr_triangle.p3)||(tri.p3= curr_triangle.p2)||(tri.p3 = curr_triangle.p3))) ||
+                          ((tri.p1= curr_triangle.p2) && ((tri.p2= curr_triangle.p1)||(tri.p2 = curr_triangle.p3)||(tri.p3= curr_triangle.p1)||(tri.p3 = curr_triangle.p3))) ||
+                          ((tri.p1 = curr_triangle.p3)&& ((tri.p2= curr_triangle.p1)||(tri.p2 = curr_triangle.p2)||(tri.p3= curr_triangle.p1)||(tri.p3 = curr_triangle.p2)))||
+                          ((tri.p2 = curr_triangle.p1) && ((tri.p1= curr_triangle.p2)||(tri.p1 = curr_triangle.p3)||(tri.p3= curr_triangle.p2)||(tri.p3 = curr_triangle.p3))) ||
+                          ((tri.p2= curr_triangle.p2) && ((tri.p1= curr_triangle.p1)||(tri.p1 = curr_triangle.p3)||(tri.p3= curr_triangle.p1)||(tri.p3 = curr_triangle.p3)) )||
+                          ((tri.p2 = curr_triangle.p3)&& ((tri.p1= curr_triangle.p1)||(tri.p1 = curr_triangle.p2)||(tri.p3= curr_triangle.p1)||(tri.p3 = curr_triangle.p2)))||
+                          ((tri.p3 = curr_triangle.p1) && ((tri.p2= curr_triangle.p2)||(tri.p2 = curr_triangle.p3)||(tri.p1= curr_triangle.p2)||(tri.p1 = curr_triangle.p3)) )||
+                          ((tri.p3= curr_triangle.p2) && ((tri.p2= curr_triangle.p1)||(tri.p2 = curr_triangle.p3)||(tri.p1= curr_triangle.p1)||(tri.p1 = curr_triangle.p3))) ||
+                          ((tri.p3 = curr_triangle.p3)&& ((tri.p2= curr_triangle.p1)||(tri.p2 = curr_triangle.p2)||(tri.p1= curr_triangle.p1)||(tri.p1 = curr_triangle.p2)))
+      in
       if have_common_arc
-      then tri_list := curr_triangle::(!tri_list);
-      (!tri_list);
+      then tri_list := curr_triangle::(!tri_list)
+    in iter (apply tri) tri_set;
+      (!tri_list);;
 
 
-let to_modify_tri_2 (tri_set:triangle set) (curr_point:point) =
-  let null_point = {x=0;y=0} in
+let to_modify_tri (tri_set:triangle set) (curr_point:point) =
+  let null_point = {x=0.;y=0.} in
   let in_tri = ref {p1 = null_point; p2 = null_point; p3 = null_point} in
   let apply p tri =
         if in_circle tri p
