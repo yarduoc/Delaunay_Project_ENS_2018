@@ -1,5 +1,7 @@
-open Pointtriangle
+
+print_string "lololo"
 open Alphaset
+open Pointtriangle
 open Display
 open Changement
 
