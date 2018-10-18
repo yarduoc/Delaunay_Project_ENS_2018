@@ -1,4 +1,4 @@
-
+#use "matrix.ml";;
 
 let is_counterclockwise (p1:point) (p2:point) (p3:point) =  (*Is correct*)
   let det = (p2.x-.p1.x)*.(p3.y-.p1.y) -. (p2.y -. p1.y)*.(p3.x-.p1.x) in
@@ -44,6 +44,8 @@ let to_modify_tri (tri_set:triangle set) (curr_point:point) =
     in iter (apply curr_point) tri_set;
     (!tri_list);;
 
+(*
+
 let next tri_set tri =
   let tri_list = ref [tri] in
   let apply tri curr_triangle =
@@ -71,3 +73,5 @@ let to_modify_tri (tri_set:triangle set) (curr_point:point) =
         then in_tri := tri
     in iter (apply curr_point) tri_set;
     next (tri_set) (!in_tri);;
+
+*)
