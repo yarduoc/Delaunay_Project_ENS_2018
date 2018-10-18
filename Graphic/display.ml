@@ -67,9 +67,9 @@ let rec draw_triangle t_set =
 let clear_display () = clear_graph();;
 
 let debug t_set newpoint =
-    set_color blue;
-    draw_triangle t_set;
-    set_color red;
     let t_set_to_modify = to_modify_tri t_set newpoint in
-    draw_triangle t_set_to_modify
-;;
+    set_color red;
+    draw_triangle t_set_to_modify;
+    set_color blue;
+    draw_point (cons (empty()) newpoint);
+    set_color black;;
