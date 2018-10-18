@@ -47,3 +47,13 @@ let rec sort ord l =
                 l_sup := cons (!l_sup) curr_point
         in iter aux_sort (cdr l);
     (sort ord !l_inf)@[f_point]@(sort ord !l_sup);;
+
+let rec ord_insert ord l a = match l with
+    | [] -> [a]
+    | h::t when ord h a -> h::(ord_insert ord t a)
+    |l -> a::l;;
+
+let rec del l x = match l with
+    | [] -> []
+    | h::t when h=x -> t
+    | h::t -> h::(del t x);;
