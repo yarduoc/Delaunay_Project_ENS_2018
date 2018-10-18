@@ -1,5 +1,5 @@
-open Graphics
 open Pointtriangle
+open Graphics
 open Alphaset
 open Detec
 

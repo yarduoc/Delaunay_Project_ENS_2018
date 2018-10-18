@@ -1,7 +1,12 @@
-open Alphaset
-open Pointtriangle
-open Display
-open Changement
+#load "graphics.cma";;
+#load "BastideCoudrayDesauw.cma";;
+
+open Graphics;;
+open Alphaset;;
+open Pointtriangle;;
+open Display;;
+open Detec;;
+open Changement;;
 
 let screen_width = ref 800;;
 let screen_height = ref 600;;
@@ -85,8 +90,5 @@ let test_debug n =
     in delaunay_stepwiset
 ;;
 
-<<<<<<< HEAD
+
 delaunay_stepwise (rand_points 20 1000. 800.) 1001 801;;
-=======
-let a = 0;;
->>>>>>> master
