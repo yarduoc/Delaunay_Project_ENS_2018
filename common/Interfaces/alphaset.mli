@@ -1,4 +1,4 @@
-type 'a set = 'a list
+type 'a set 
 val empty : unit -> 'a list
 val cons : 'a list -> 'a -> 'a list
 val car : 'a list -> 'a
