@@ -30,9 +30,9 @@ let in_circle (tri:triangle) (curr_point:point) =
                           *.(tri.p3.y -. curr_point.y)
                     )|] |]*)
 
-      let in_matrix  = [| [|ax; ay; ax*.ax -. ay*.ay|];
-                          [|bx; by; bx*.bx -. by*.by|];
-                          [|cx; cy; cx*.cx -. cy*.cy|]|]
+      let in_matrix  = [| [|ax; ay; ax*.ax +. ay*.ay|];
+                          [|bx; by; bx*.bx +. by*.by|];
+                          [|cx; cy; cx*.cx +. cy*.cy|]|]
                  in
 
   let det = det_3 in_matrix in

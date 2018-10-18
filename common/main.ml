@@ -94,8 +94,10 @@ let test_debug n =
             draw_triangle !(t_set);
             draw_point point_set;
             debug (!t_set) (car !p_set);
-            sleep 30;
+            sleep 3;
         done;
         !t_set
     in delaunay_stepwiset
 ;;
+
+let a = 0;;
