@@ -24,11 +24,16 @@ let sleep k = let p = ref 0 in
 (* Random function *)
 
 let rand_points nb x_max y_max =
+    let ord p1 p2 =
+        if p1.x = p2.x then
+            p1.y < p2.y
+        else p1.x < p2.x
+    in
     let sortie = ref [] in
     for k=0 to nb-1 do
         sortie := (make_point (Random.float(x_max)) (Random.float(y_max)))::(!sortie)
     done;
-    !sortie
+    sort ord !sortie
 ;;
 
 (* Triangle set initialisation with the frame triangles *)
