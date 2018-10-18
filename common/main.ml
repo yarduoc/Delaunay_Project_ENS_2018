@@ -1,5 +1,5 @@
 
-
+(*
 let screen_width = ref 800;;
 let screen_height = ref 600;;
 
@@ -11,13 +11,13 @@ type triangle_set = triangle list;;
 let make_triangle a b c = {p1 = a; p2 = b; p3 = c};;
 let make_point a b = {x = a; y = b};;
 
-(*
+
 #use "common/alphaset.ml"
 #use "Detection/matrix.ml"
 #use "Detection/detec.ml"
 #use "Change/changement.ml"
-#use "Graphic/display.ml";;
-*)
+#use "Graphic/display.ml";;*)
+
 
 
 
