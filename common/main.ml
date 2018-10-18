@@ -72,7 +72,6 @@ let delaunay_stepwise point_set max_x max_y=
         p_set := cdr !p_set;
         draw_triangle !(t_set);
         draw_point point_set;
-        sleep 20;
     done;
     !t_set
 ;;
