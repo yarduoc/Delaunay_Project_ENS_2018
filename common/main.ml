@@ -1,20 +1,14 @@
-
-open Changement
+open Alphaset
+open Pointtriangle
 open Display
+open Changement
 
 let screen_width = ref 800;;
 let screen_height = ref 600;;
 
-#use "common/alphaset.ml"
-#use "Detection/matrix.ml"
-#use "Detection/detec.ml"
-#use "Change/changement.ml"
-#use "Graphic/display.ml"
-
-
 (* Functions yet to be imported or implemented *)
 let sleep k =
-    for l = 0 to (k*10000000) do 1+1 done
+    for l = 0 to (k*10000000) do () done
 ;;
 
 (* Random function *)

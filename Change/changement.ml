@@ -1,4 +1,6 @@
 open Detec
+open Alphaset
+open Pointtriangle
 
 let double_find set p = let p1,p2 = p in (find set p || find set (p2,p1)) ;;
 

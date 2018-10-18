@@ -1,2 +1,2 @@
-val border : : triangle set -> (point * point) set
-val add_point : triangle set -> point -> triangle set
+val border : Pointtriangle.triangle Alphaset.set -> (Pointtriangle.point * Pointtriangle.point) Alphaset.set
+val add_point : Pointtriangle.triangle Alphaset.set -> Pointtriangle.point -> Pointtriangle.triangle Alphaset.set

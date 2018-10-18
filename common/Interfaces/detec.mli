@@ -1,3 +1,3 @@
-val is_counterclockwise : point -> point -> point -> bool
-val in_circle : triangle -> point -> bool
-val to_modify_tri : triangle_set -> point -> triangle_set
+val is_counterclockwise : Pointtriangle.point -> Pointtriangle.point -> Pointtriangle.point -> bool
+val in_circle : Pointtriangle.triangle -> Pointtriangle.point -> bool
+val to_modify_tri : Pointtriangle.triangle_set -> Pointtriangle.point -> Pointtriangle.triangle_set
