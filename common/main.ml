@@ -1,13 +1,9 @@
+
+open Changement
+open Display
+
 let screen_width = ref 800;;
 let screen_height = ref 600;;
-
-type point = {x: float; y: float};;
-type triangle = { p1 : point; p2 : point ; p3 : point};;
-type point_set = point list;;
-type triangle_set = triangle list;;
-
-let make_triangle a b c = {p1 = a; p2 = b; p3 = c};;
-let make_point a b = {x = a; y = b};;
 
 #use "common/alphaset.ml"
 #use "Detection/matrix.ml"
@@ -24,9 +20,9 @@ let sleep k =
 (* Random function *)
 
 let rand_points nb x_max y_max =
-    let sortie = ref [] in
+    let sortie = ref (empty ()) in
     for k=0 to nb-1 do
-        sortie := {x = Random.float(x_max); y = Random.float(y_max)}::(!sortie)
+        sortie := (cons !sortie {x = Random.float(x_max); y = Random.float(y_max)})
     done;
     !sortie
 ;;
@@ -77,3 +73,5 @@ let test_debug () =
     debug t_set_to_study (make_point 400. 600.);
     t_set_to_study
 ;;
+
+delaunay_stepwise (rand_points nb x_max y_max)

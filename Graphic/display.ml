@@ -1,6 +1,6 @@
-#load "graphics.cma"
 open Graphics
-#use "Detection/detec.ml"
+open Pointtriangle
+open Detec
 
 (* Global variables of the display module*)
 
