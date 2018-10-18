@@ -1,5 +1,5 @@
-open Alphaset
 open Pointtriangle
+open Alphaset
 open Display
 open Changement
 
