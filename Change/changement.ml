@@ -11,12 +11,12 @@ let border_aux (line_set:(point*point) set) =
     let seen_line_set = ref (empty()) in
     let suppr_line_set = ref (empty()) in
     let result_line_set = ref line_set in
-    let find_aux curr_line =(
-        if  not (double_find !suppr_line_set curr_line) then
-            if double_find !seen_line_set curr_line then
-                suppr_line_set := curr_line::(!suppr_line_set);
-        if not (double_find !seen_line_set curr_line) then
-            seen_line_set := curr_line::(!seen_line_set))
+    let find_aux curr_line =
+    if  not (double_find !suppr_line_set curr_line) then
+        if double_find !seen_line_set curr_line then
+            suppr_line_set := curr_line::(!suppr_line_set);
+    if not (double_find !seen_line_set curr_line) then
+        seen_line_set := curr_line::(!seen_line_set)
     in iter find_aux line_set;
     let suppr_aux curr_line =
         if double_find !suppr_line_set curr_line then
@@ -32,7 +32,8 @@ let suppr_border tri_set suppr_set =
     let suppr_border_aux curr_tri =
         suppress t_set (curr_tri)
     in iter suppr_border_aux suppr_set;
-    !t_set;;
+    !t_set
+;;
 
 
 let add_point tri_set new_point =

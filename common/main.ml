@@ -1,5 +1,3 @@
-
-
 let screen_width = ref 800;;
 let screen_height = ref 600;;
 
@@ -17,9 +15,6 @@ let make_point a b = {x = a; y = b};;
 #use "Detection/detec.ml"
 #use "Change/changement.ml"
 #use "Graphic/display.ml";;
-
-
-
 
 (* Functions yet to be imported or implemented *)
 let sleep k = let p = ref 0 in
@@ -74,7 +69,6 @@ let delaunay_stepwise point_set max_x max_y=
         draw_point point_set;
         sleep 5;
     done;
-    !t_set
 ;;
 
 let test_debug n =
@@ -100,5 +94,3 @@ let test_debug n =
         !t_set
     in delaunay_stepwiset
 ;;
-
-let a = 0;;
