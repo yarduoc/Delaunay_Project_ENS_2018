@@ -2,7 +2,7 @@ open Detec
 open Alphaset
 open Pointtriangle
 
-let double_find set p = let p1,p2 = p in (find set p || find set (p2,p1)) ;;
+let double_find p_set p = let p1,p2 = p in (find p_set p || find p_set (p2,p1)) ;;
 
 let get_line (tri_set:triangle_set) =
     let result_line_set = ref (empty()) in
@@ -15,12 +15,12 @@ let border_aux (line_set:(point*point) set) =
     let seen_line_set = ref (empty()) in
     let suppr_line_set = ref (empty()) in
     let result_line_set = ref line_set in
-    let find_aux curr_line =
+    let find_aux curr_line =(
         if  not (double_find !suppr_line_set curr_line) then
             if double_find !seen_line_set curr_line then
                 suppr_line_set := curr_line::(!suppr_line_set);
         if not (double_find !seen_line_set curr_line) then
-            seen_line_set := curr_line::(!seen_line_set);
+            seen_line_set := curr_line::(!seen_line_set))
     in iter find_aux line_set;
     let suppr_aux curr_line =
         if double_find !suppr_line_set curr_line then
@@ -31,21 +31,18 @@ let border_aux (line_set:(point*point) set) =
 
 let border tri_set = border_aux (get_line tri_set);;
 
-let suppr_border tri_set suppr_set=
+let suppr_border tri_set suppr_set =
     let t_set = ref tri_set in
-    let rec suppr_border_aux curr_suppr_set =
-        if is_empty curr_suppr_set then ()
-        else begin
-            suppress t_set (car curr_suppr_set);
-            suppr_border_aux (cdr curr_suppr_set)
-        end
-    in suppr_border_aux suppr_set;
+    let suppr_border_aux curr_tri =
+        suppress t_set (curr_tri)
+    in iter suppr_border_aux suppr_set;
     !t_set;;
 
+
 let add_point tri_set new_point =
-    let curr_tri_set = to_modify_tri tri_set new_point in
-    let new_border = border curr_tri_set in
-    let result_tri_set = ref (suppr_border tri_set curr_tri_set) in
+    let modify_tri_set = to_modify_tri tri_set new_point in
+    let new_border = border modify_tri_set in
+    let result_tri_set = ref (suppr_border tri_set modify_tri_set) in
     let add_tri_aux curr_line =
         let p1,p2 = curr_line in
         let new_tri = make_triangle p1 p2 new_point in

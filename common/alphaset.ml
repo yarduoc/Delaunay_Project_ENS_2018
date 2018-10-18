@@ -26,6 +26,6 @@ let rec iter f l = match l with
     | h::t -> (f(h) ; iter f t)
 ;;
 
-let is_empty l = l = [];;
+let is_empty l = (l = []);;
 
 let copy l = l;;

@@ -16,7 +16,7 @@ let sleep k =
 let rand_points nb x_max y_max =
     let sortie = ref (empty ()) in
     for k=0 to nb-1 do
-        sortie := (cons !sortie {x = Random.float(x_max); y = Random.float(y_max)})
+        sortie := (cons !sortie make_point (Random.float(x_max)) (Random.float(y_max)))
     done;
     !sortie
 ;;
@@ -57,15 +57,36 @@ let delaunay_stepwise point_set max_x max_y=
         p_set := cdr !p_set;
         draw_triangle !(t_set);
         draw_point point_set;
-        sleep 5;
     done;
+    !t_set
 ;;
 
-let test_debug () =
+let test_debug n =
     init_display 1001 801;
-    let t_set_to_study = delaunay (rand_points 3 1000. 800.) 1001 801 in
-    debug t_set_to_study (make_point 400. 600.);
-    t_set_to_study
+    let max_x = 1001 in
+    let max_y = 801 in
+
+    let point_set = (rand_points n 1000. 800.) in
+    let delaunay_stepwiset =
+        let t_set = ref (init_triangle_set max_x max_y) in
+        let p_set = ref (copy point_set) in
+        init_display max_x max_y;
+        while not (is_empty !p_set) do
+            clear_display ();
+            let curr_point = car !p_set in
+            t_set := add_point (!t_set) curr_point;
+            p_set := cdr !p_set;
+            draw_triangle !(t_set);
+            draw_point point_set;
+            debug (!t_set) (car !p_set);
+            sleep 3;
+        done;
+        !t_set
+    in delaunay_stepwiset
 ;;
 
+<<<<<<< HEAD
 delaunay_stepwise (rand_points 20 1000. 800.) 1001 801;;
+=======
+let a = 0;;
+>>>>>>> master

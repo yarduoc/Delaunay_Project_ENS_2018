@@ -9,7 +9,7 @@ let is_counterclockwise (p1:point) (p2:point) (p3:point) =  (*Is correct*)
 
 let in_circle (tri:triangle) (curr_point:point) =
   let in_matrix =  [| [| (tri.p1.x -. curr_point.x);
-                      (tri.p1.y -. curr_point.y);
+                    (tri.p1.y -. curr_point.y);
                       ((tri.p1.x -. curr_point.x)
                          *.(tri.p1.x -. curr_point.x)
                          +.(tri.p1.y -. curr_point.y)
