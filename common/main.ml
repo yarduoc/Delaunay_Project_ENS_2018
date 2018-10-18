@@ -99,3 +99,5 @@ let test_debug n =
         !t_set
     in delaunay_stepwiset
 ;;
+
+let a = 0;;
