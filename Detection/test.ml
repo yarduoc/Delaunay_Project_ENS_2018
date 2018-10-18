@@ -17,12 +17,14 @@ let t1 = make_triangle p1 p2 p3;;
 let t2 = make_triangle p1 p2 p4;;
 let t3 = make_triangle p1 p3 p4;;
 
-let p_set = cons (cons (cons (empty()) (p1,p2)) (p2,p3)) (p3,p4) ;;
 
 #use "../common/alphaset.ml";;
 #use "../Change/changement.ml";;
 #use "matrix.ml";;
 #use "detec.ml";;
+
+let p_set = cons (cons (cons (empty()) (p1,p2)) (p2,p3)) (p3,p4) ;;
+
 (*
 let test_iter l =
   let p = ref [] in
@@ -71,4 +73,6 @@ random_triangle 10000;;
 
 *)
 
-double_find p_set (p2,p1);;
+(*
+double_find p_set (p3,p2);;
+*)
