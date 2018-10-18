@@ -1,5 +1,4 @@
-#use "../common/alphaset.ml";;
-#use "../Change/changement.ml";;
+
 
 type point = {x: float; y: float};;
 type triangle = { p1 : point; p2 : point ; p3 : point};;
@@ -14,6 +13,16 @@ let p2 = make_point 1. 1.;;
 let p3 = make_point 2. 2.;;
 let p4 = make_point 1. 0.;;
 
+let t1 = make_triangle p1 p2 p3;;
+let t2 = make_triangle p1 p2 p4;;
+let t3 = make_triangle p1 p3 p4;;
+
+let t_set = cons (cons (cons (empty()) t1) t2) t3 ;;
+
+#use "../common/alphaset.ml";;
+#use "../Change/changement.ml";;
+#use "matrix.ml";;
+#use "detec.ml";;
 (*
 let test_iter l =
   let p = ref [] in
@@ -40,9 +49,24 @@ let p =  [p1;p2;p2;p2;p3;p2;p2;p1;p3;p1];;
 find p p4;;
 *)
 
+(*
+let t_suppr = cons (cons (empty()) t2) t3;;
 
-let t1 = make_triangle p1 p2 p3;;
-let t2 = make_triangle p1 p2 p4;;
-let t3 = make_triangle p1 p3 p4;;
+suppr_border t_set t_suppr;;
 
-let 
+*)
+
+(*
+let rec random_triangle n =
+  if n = 0 then true
+  else let p1 = make_point (Random.float(100.)) (Random.float(100.)) in
+       let p2 = make_point (Random.float(100.)) (Random.float(100.)) in
+       let p3 = make_point (Random.float(100.)) (Random.float(100.)) in
+
+       let value = ((is_counterclockwise p1 p2 p3) != (is_counterclockwise p1 p3 p2)) in
+
+       value&&(random_triangle (n-1));;
+
+random_triangle 10000;;
+
+*)
