@@ -74,4 +74,4 @@ let test_debug () =
     t_set_to_study
 ;;
 
-delaunay_stepwise (rand_points nb x_max y_max)
+delaunay_stepwise (rand_points 20 1000. 800.) 1001 801;;
