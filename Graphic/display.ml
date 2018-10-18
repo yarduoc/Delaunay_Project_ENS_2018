@@ -64,6 +64,16 @@ let rec draw_triangle t_set =
         end
 ;;
 
+let rec draw_line l_set =
+    let t_set = ref (empty()) in
+    let draw_line_aux curr_line =
+        let p1,p2 = curr_line in
+        let curr_t = make_triangle p1 p2 p2 in
+        t_set := cons (!t_set) curr_t
+    in iter draw_line_aux l_set;
+    draw_triangle (!t_set);;
+
+
 let clear_display () = clear_graph();;
 
 let debug t_set newpoint =

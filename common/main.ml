@@ -1,5 +1,5 @@
 
-(*
+
 let screen_width = ref 800;;
 let screen_height = ref 600;;
 
@@ -16,7 +16,7 @@ let make_point a b = {x = a; y = b};;
 #use "Detection/matrix.ml"
 #use "Detection/detec.ml"
 #use "Change/changement.ml"
-#use "Graphic/display.ml";;*)
+#use "Graphic/display.ml";;
 
 
 
@@ -94,7 +94,7 @@ let test_debug n =
             draw_triangle !(t_set);
             draw_point point_set;
             debug (!t_set) (car !p_set);
-            sleep 30;
+            sleep 3;
         done;
         !t_set
     in delaunay_stepwiset
