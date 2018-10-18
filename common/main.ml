@@ -9,15 +9,17 @@ type triangle_set = triangle list;;
 let make_triangle a b c = {p1 = a; p2 = b; p3 = c};;
 let make_point a b = {x = a; y = b};;
 
-#use "common/alphaset.ml";;
-#use "Graphic/display.ml"
+#use "common/alphaset.ml"
 #use "Detection/matrix.ml"
 #use "Detection/detec.ml"
 #use "Change/changement.ml"
+#use "Graphic/display.ml"
 
 
 (* Functions yet to be imported or implemented *)
-let sleep k = let x = k + 1 in print_int x;;
+let sleep k =
+    for l = 0 to (k*10000000) do 1+1 done
+;;
 
 (* Random function *)
 
@@ -51,7 +53,7 @@ let delaunay point_set max_x max_y =
         t_set := add_point !t_set curr_point;
         p_set := cdr !p_set
     done;
-    t_set
+    !t_set
 ;;
 
 let delaunay_stepwise point_set max_x max_y=
@@ -59,11 +61,19 @@ let delaunay_stepwise point_set max_x max_y=
     let p_set = ref (copy point_set) in
     init_display max_x max_y;
     while not (is_empty !p_set) do
+        clear_display ();
         let curr_point = car !p_set in
         t_set := add_point (!t_set) curr_point;
         p_set := cdr !p_set;
         draw_triangle !(t_set);
         draw_point point_set;
-        sleep 1;
+        sleep 5;
     done;
+;;
+
+let test_debug () =
+    init_display 1001 801;
+    let t_set_to_study = delaunay (rand_points 3 1000. 800.) 1001 801 in
+    debug t_set_to_study (make_point 400. 600.);
+    t_set_to_study
 ;;
