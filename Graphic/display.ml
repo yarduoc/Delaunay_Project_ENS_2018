@@ -40,19 +40,28 @@ let init_display width height =
     set_color black
 ;;
 
-let rec draw_point p_set = match p_set with
-    | [] -> ()
-    | curr_point::remaining_points -> plot_d (point_to_int_double curr_point);
-                                      draw_point remaining_points
+let rec draw_point p_set =
+    if is_empty p_set
+        then ()
+    else
+        let curr_point = car p_set in
+        let remaining_points = cdr p_set in
+        begin
+            plot_d (point_to_int_double curr_point);
+            draw_point remaining_points
+        end
 ;;
-let draw_triangle t_set =
-    let rec draw_triangle_aux t_set = match t_set with
-        | [] -> ()
-        | tr::t -> (let triangle_i = triangle_to_int_array tr in
-                    draw_poly triangle_i;
-                    draw_triangle_aux t)
-    in
-    draw_triangle_aux t_set
+let rec draw_triangle t_set =
+    if is_empty t_set
+        then ()
+    else
+        let curr_triangle = car t_set in
+        let other_triangles = cdr t_set in
+        let triangle_i = triangle_to_int_array curr_triangle in
+        begin
+            draw_poly triangle_i;
+            draw_triangle other_triangles
+        end
 ;;
 
 let clear_display () = clear_graph();;
