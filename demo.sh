@@ -5,7 +5,7 @@ rm -r *.cm*
 
 ocamlc -I Compilables/ -c -o Compilables/alphaset.cmi common/Interfaces/alphaset.mli
 ocamlc -I Compilables/ -c -o Compilables/alphaset.cmo common/alphaset.ml
-ocamlc -I Compilables/ -a -o alphaset.cma Compilables/alphaset.cmo
+ocamlc -I Compilables/ -a -o Compilables/alphaset.cma Compilables/alphaset.cmo
 
 echo Alphaset OK
 
