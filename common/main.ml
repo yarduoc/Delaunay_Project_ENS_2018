@@ -36,8 +36,10 @@ let rand_points nb x_max y_max =
 let rand_points nb x_max y_max =
     let sortie = ref [] in
     for k=0 to nb do
-        sortie := {x = Random.int(x_max); y = Random.int(y_max)}::(!sortie)
+        sortie := {x = Random.float(x_max); y = Random.float(y_max)}::(!sortie)
     done;
+    !sortie
+;;
 
 
 
@@ -51,7 +53,6 @@ let init_triangle_set max_x max_y =
     let t_set =   cons
                   (cons (empty()) {p1 = p1_max; p2 = p2_max; p3 = p3_max})
                   { p1 = p3_max; p2 = p2_max; p3 = p4_max}
-
     in t_set
 ;;
 
