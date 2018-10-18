@@ -47,4 +47,4 @@ let rec draw_triangle t_set = match t_set with
     | tr::t -> let triangle_i = triangle_to_int_array tr in
                draw_poly triangle_i;
                draw_triangle t
-;;
+;; 
