@@ -1,5 +1,3 @@
-
-print_string "lololo"
 open Alphaset
 open Pointtriangle
 open Display
