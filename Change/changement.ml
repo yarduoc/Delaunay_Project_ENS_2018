@@ -25,6 +25,7 @@ let border_aux (line_set:(point*point) set) =
     !result_line_set
 ;;
 
+
 let border tri_set = border_aux (get_line tri_set);;
 
 let suppr_border tri_set suppr_set =
