@@ -1,7 +1,7 @@
 type 'a matrix = 'a array array;;
 
 (*Builders and modifiers*)
-let create_matrix_3x3 () = Array.make_matrix 3 3 0. ;;
+let create_matrix_3x3 () = Array.make_matrix 3 3 0.;;
 
 (*Getters*)
 
@@ -45,9 +45,10 @@ let get_minor matrix i j =
 
 
 let det_3 matrix = (*determinant 3*3 *)
-  let c_01 = -.det_2 (get_minor matrix 0 1)in
-  let c_11 =   det_2 (get_minor matrix 1 1)in
-  let c_21 = -.det_2 (get_minor matrix 2 1)in
-  (indice matrix 0 1)*.c_01 +. (indice matrix 1 1)
-  *. c_11 +. (indice matrix 2 1)*.c_21
-  ;;
+    let c_01 = -.det_2 (get_minor matrix 0 1)in
+    let c_11 =   det_2 (get_minor matrix 1 1)in
+    let c_21 = -.det_2 (get_minor matrix 2 1)in
+    (indice matrix 0 1) *. c_01
+    +. (indice matrix 1 1) *. c_11
+    +. (indice matrix 2 1) *. c_21
+;;
