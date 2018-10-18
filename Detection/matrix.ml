@@ -41,25 +41,6 @@ let get_minor matrix i j =
     minor_matrix
 ;;
 
-let mineur_3 m i j = (*give the minor of m develop with M[i,j]*)
-      let  minor = Array.make_matrix 2 2 0. in
-      let a = ref 0 and b = ref 0 in
-      for k=0 to 2 do
-        for l=0 to 2 do
-          if (k !=i && l != j && !a < 2 )
-           then begin minor.(!b).(!a) <-  m.(k).(l);
-              a:= 1 + (!a)
-                end;
-          done;
-          if (k !=i && !b < 2)
-            then  begin
-                  b := 1+ (!b);
-                  a:= 0
-                  end;
-
-        done;
-        det_3 minor;;
-
 
 let det_3 matrix = (*determinant 3*3 *)
   let c_01 = -.det_2 (get_minor matrix 0 1)in
@@ -72,15 +53,7 @@ let rec puissance a n = if n= 0 then 1
     else a*.(puissance a (n-1));;
 
 let det_4 m =
-  let s= ref 0 and j = 4 in
+  let sum = ref 0 in let j = 3 in
     for i=0 to 3
-      do s:= (puissance (-1.) (i+j)) *. (mineur_3 m i j) +. (!s) done
-
-  !s;;
-
-let m = [| [|1.;2.;3.;4.|];
-            [|1.;2.;3.;-.4.|];
-            [|-.1.;2.;3.;4.|];
-            [|1.;-.2.;3.;4.|] |];;
-
-det_4 m;;
+      do sum := (!sum) +. ((puissance (-1.) (i+j)) *. (det_3 (get_minor m i j)) done
+  (!sum);;
