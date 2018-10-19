@@ -72,6 +72,8 @@ let wait_move p_set =
                                 raise End
                             end;
                     end;
+                if pressed.key = 'q' then
+                    close_graph();
             end
     done;
     with End -> ()
