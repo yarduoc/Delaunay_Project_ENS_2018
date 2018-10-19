@@ -51,6 +51,7 @@ let rec draw_point p_set =
             draw_point remaining_points
         end
 ;;
+
 let rec draw_triangle t_set =
     if is_empty t_set
         then ()

@@ -9,6 +9,11 @@ type triangle_set = triangle list;;
 let make_triangle a b c = {p1 = a; p2 = b; p3 = c};;
 let make_point a b = {x = a; y = b};;
 
+let ord_points p1 p2 =
+    if p1.x = p2.x then
+        p1.y < p2.y
+    else p1.x < p2.x
+;;
 
 #use "common/alphaset.ml"
 #use "Detection/matrix.ml"
@@ -24,16 +29,11 @@ let sleep k = let p = ref 0 in
 (* Random function *)
 
 let rand_points nb x_max y_max =
-    let ord p1 p2 =
-        if p1.x = p2.x then
-            p1.y < p2.y
-        else p1.x < p2.x
-    in
     let sortie = ref [] in
     for k=0 to nb-1 do
         sortie := (make_point (Random.float(x_max)) (Random.float(y_max)))::(!sortie)
     done;
-    sort ord !sortie
+    sort ord_points !sortie
 ;;
 
 (* Random function *)
