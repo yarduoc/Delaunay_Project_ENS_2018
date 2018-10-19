@@ -37,6 +37,13 @@ let wait_move p_set =
                 p_set := ord_insert ord_points !p_set mouse_destination;
                 match released with
                     | status when not status.button -> raise End
+                    | status when released.Graphics.mouse_x < 0 ||
+                                  released.Graphics.mouse_x > 1000 ||
+                                  released.Graphics.mouse_y < 0 ||
+                                  released.Graphics.mouse_y > 800
+                                  ->
+                                  p_set := ord_insert ord_points !p_set !point_a_deplacer;
+                                  p_set := del !p_set mouse_destination;
                     | status -> begin
                                     let affiche = add_point !t_set mouse_destination in
                                     point_a_deplacer := mouse_destination;
