@@ -38,6 +38,7 @@ let print_triangle_set t_set = iter print_triangle t_set;;
 #use "Change/changement.ml"
 #use "Morphism/1_by_1_morphism.ml"
 #use "Graphic/display.ml";;
+#use "Graphic/mouse_test.ml";;
 
 let ord_points p1 p2 =
     if p1.x = p2.x then
@@ -66,8 +67,8 @@ let rand_points nb x_max y_max =
     sort ord !sortie
 ;;
 
-let rand_m_points nb x_max y_max =
-    point_to_morph (rand_points nb x_max y_max);;
+(*let rand_m_points nb x_max y_max =
+    point_to_morph (rand_points nb x_max y_max);;*)
 
 (* Triangle set initialisation with the frame triangles *)
 
