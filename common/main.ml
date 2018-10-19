@@ -37,6 +37,7 @@ let print_triangle_set t_set = iter print_triangle t_set;;
 #use "Detection/ext_detect.ml"
 #use "Change/changement.ml"
 #use "Morphism/1_by_1_morphism.ml"
+#use "Morphism/2set_morphism.ml"
 #use "Graphic/display.ml";;
 
 
