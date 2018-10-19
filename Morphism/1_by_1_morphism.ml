@@ -52,7 +52,10 @@ let nearest_morph_point morph_p_set mouse_point =
             res_point := p
         end
     in iter is_min morph_p_set;
-    !res_point
+    if !inf = max_float then
+        failwith "no more point"
+    else
+        !res_point
 ;;
 
 
@@ -64,7 +67,9 @@ let delta_set p_set delta =
         let angle = Random.float (2.*.pi) in
         let dist = Random.float delta in
         let x,y = curr_point.x,curr_point.y in
-        let new_point = make_point (((cos angle)*.dist)+.x) (((sin angle)*.dist)+.y)
+        let new_x = max 0. (((cos angle)*.dist)+.x) in
+        let new_y = max 0. (((sin angle)*.dist)+.y) in
+        let new_point = make_point new_x new_y
         in res_p_set := cons !res_p_set (new_point,ind)
     in iter delta_aux p_set;
     !res_p_set;;

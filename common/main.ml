@@ -38,7 +38,7 @@ let print_triangle_set t_set = iter print_triangle t_set;;
 #use "Change/changement.ml"
 #use "Morphism/1_by_1_morphism.ml"
 #use "Graphic/display.ml";;
-#use "Graphic/mouse_test.ml";;
+
 
 let ord_points p1 p2 =
     if p1.x = p2.x then
@@ -149,3 +149,5 @@ let test_debug n =
         !t_set
     in delaunay_stepwiset
 ;;
+
+#use "Graphic/mouse_test.ml";;
