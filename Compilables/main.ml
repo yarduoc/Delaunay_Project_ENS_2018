@@ -91,7 +91,7 @@ let test_debug n =
 ;;
 
 init_display 1001 800;;
-let points  = (rand_points 5000 1000. 800.);;
+let points  = (rand_points 500 1000. 800.);;
 draw_triangle (delaunay points 1001 801);;
 draw_point points;;
 
