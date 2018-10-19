@@ -1,21 +1,5 @@
 #load "graphics.cma"
 open Graphics
-#use "common/main.ml"
-#use "common/alphaset.ml"
-#use "Detection/ext_detect.ml"
-#use "Graphic/display.ml"
-
-let x = 1000 ;;
-open_graph (" " ^ (string_of_int x ) ^ "x800-0+0");;
-
-let print_coords event =
-    print_string "mouse [";
-    print_int event.Graphics.mouse_x;
-    print_string " ; ";
-    print_int event.Graphics.mouse_y;
-    print_string "]";
-    print_newline ()
-;;
 
 exception End;;
 let wait_move p_set =

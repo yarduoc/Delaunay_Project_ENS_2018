@@ -17,6 +17,7 @@ let make_point a b = {x = a; y = b};;
 #use "Change/changement.ml"
 #use "Morphism/1_by_1_morphism.ml"
 #use "Graphic/display.ml";;
+#use "Graphic/mouse_test.ml";;
 
 (* Functions yet to be imported or implemented *)
 let sleep k = let p = ref 0 in
@@ -38,8 +39,8 @@ let rand_points nb x_max y_max =
     sort ord !sortie
 ;;
 
-let rand_m_points nb x_max y_max =
-    point_to_morph (rand_points nb x_max y_max);;
+(*let rand_m_points nb x_max y_max =
+    point_to_morph (rand_points nb x_max y_max);;*)
 
 (* Triangle set initialisation with the frame triangles *)
 
