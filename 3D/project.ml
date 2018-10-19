@@ -45,52 +45,14 @@ let rec projection (p_set : point set) =
   ;;
 
   let delaunay3D point_set max_x max_y max_z=  (*Is 3D*)
-      let t_set = ref (init_triangle_set max_x max_y max_z) in
+      let t_set = ref (init_triangle_set_3D max_x max_y max_z) in
       let p_set = ref (copy point_set) in
       while not (is_empty !p_set) do
           let curr_point = car !p_set in
-          t_set := add_point !t_set curr_point;
+          t_set := add_point_3D !t_set curr_point;
           p_set := cdr !p_set
       done;
       !t_set
-  ;;
-
-  let delaunay_stepwise point_set max_x max_y=
-      let t_set = ref (init_triangle_set max_x max_y) in
-      let p_set = ref (copy point_set) in
-      init_display max_x max_y;
-      while not (is_empty !p_set) do
-          clear_display ();
-          let curr_point = car !p_set in
-          t_set := add_point (!t_set) curr_point;
-          p_set := cdr !p_set;
-          draw_triangle !(t_set);
-          draw_point point_set;
-      done;
-      !t_set
-  ;;
-
-  let test_debug n =
-      init_display 1001 801;
-      let max_x = 1001 in
-      let max_y = 801 in
-
-      let point_set = (rand_points n 1000. 800.) in
-      let delaunay_stepwiset =
-          let t_set = ref (init_triangle_set max_x max_y) in
-          let p_set = ref (copy point_set) in
-          init_display max_x max_y;
-          while not (is_empty !p_set) do
-              clear_display ();
-              let curr_point = car !p_set in
-              t_set := add_point (!t_set) curr_point;
-              p_set := cdr !p_set;
-              draw_triangle !(t_set);
-              draw_point point_set;
-              debug (!t_set) (car !p_set);
-          done;
-          !t_set
-      in delaunay_stepwiset
   ;;
 
   init_display 1001 800;;

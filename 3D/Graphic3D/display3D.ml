@@ -1,7 +1,7 @@
-open Pointtriangle
+open Pointtriangle3D
 open Graphics
-open Alphaset
-open Detec
+open Alphaset3D
+open Detec3D
 
 (* Global variables of the display module*)
 
@@ -17,15 +17,16 @@ let sleep k =
     done
 ;;
 
-let point_to_int_double point =
+let point_to_int_triple point =
 ( (int_of_float point.x),
-  (int_of_float point.y)
+  (int_of_float point.y),
+  (int_of_float point.z)
 );;
 
 let triangle_to_int_array triangle =
-[| point_to_int_double triangle.p1;
-   point_to_int_double triangle.p2;
-   point_to_int_double triangle.p3
+[| point_to_int_triple triangle.p1;
+   point_to_int_triple triangle.p2;
+   point_to_int_triple triangle.p3
 |];;
 
 (* Data plotting from int couples *)
@@ -43,7 +44,7 @@ let init_display width height =
     set_color black
 ;;
 
-let rec draw_point p_set =
+let rec draw_point_3D p_set =
     if is_empty p_set
         then ()
     else
@@ -54,15 +55,23 @@ let rec draw_point p_set =
             draw_point remaining_points
         end
 ;;
-let rec draw_triangle t_set =
+
+let slope_3d point_array =
+    let (x1,y1,z1)=
+
+
+let rec draw_triangle_3D t_set =
     if is_empty t_set
         then ()
     else
         let curr_triangle = car t_set in
         let other_triangles = cdr t_set in
         let triangle_i = triangle_to_int_array curr_triangle in
+        let slope_factor = slope_3d triangle_i in
         begin
+            set_color(rgb (slope_factor*255) 0 0);
             draw_poly triangle_i;
+            fill_poly triangle_i;
             draw_triangle other_triangles
         end
 ;;
