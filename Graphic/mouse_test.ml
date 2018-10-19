@@ -69,6 +69,5 @@ let run point_set =
         draw_triangle (delaunay !p_set 1000 800);
         draw_point !p_set;
         wait_move p_set;
-        sound 440 2;
     done
 ;;
