@@ -38,6 +38,9 @@ let rand_points nb x_max y_max =
     sort ord !sortie
 ;;
 
+let rand_m_points nb x_max y_max =
+    point_to_morph (rand_points nb x_max y_max);;
+
 (* Triangle set initialisation with the frame triangles *)
 
 let init_triangle_set max_x max_y =
@@ -77,6 +80,22 @@ let delaunay_stepwise point_set max_x max_y=
         sleep 5;
     done;
 ;;
+
+let delaunay_default p_set = delaunay p_set 1000 800;;
+
+let delaunay_switch_set p_morph_set1 p_morph_set2 t =
+    let res_p_set = ref (empty()) in
+    let ind_set = init_ind (length p_morph_set1) in
+    let switch_set_aux curr_ind =
+        let p1 = fst (morph_fun p_morph_set1 curr_ind) in
+        let p2 = fst (morph_fun p_morph_set2 curr_ind) in
+        let new_x = (t*.p1.x) +. ((1.-.t)*.p2.x) in
+        let new_y = (t*.p1.y) +. ((1.-.t)*.p2.y) in
+        let new_point = make_point new_x new_y in
+        res_p_set := cons !res_p_set new_point
+    in
+    iter switch_set_aux ind_set;
+    delaunay_default !res_p_set;;
 
 let test_debug n =
     init_display 1001 801;
