@@ -9,17 +9,13 @@ type triangle_set = triangle list;;
 let make_triangle a b c = {p1 = a; p2 = b; p3 = c};;
 let make_point a b = {x = a; y = b};;
 
-let ord_points p1 p2 =
-    if p1.x = p2.x then
-        p1.y < p2.y
-    else p1.x < p2.x
-;;
 
 #use "common/alphaset.ml"
 #use "Detection/matrix.ml"
 #use "Detection/detec.ml"
-#use "Change/changement.ml"
 #use "Detection/ext_detect.ml"
+#use "Change/changement.ml"
+#use "Morphism/1_by_1_morphism.ml"
 #use "Graphic/display.ml";;
 
 (* Functions yet to be imported or implemented *)
@@ -30,24 +26,17 @@ let sleep k = let p = ref 0 in
 (* Random function *)
 
 let rand_points nb x_max y_max =
+    let ord p1 p2 =
+        if p1.x = p2.x then
+            p1.y < p2.y
+        else p1.x < p2.x
+    in
     let sortie = ref [] in
     for k=0 to nb-1 do
         sortie := (make_point (Random.float(x_max)) (Random.float(y_max)))::(!sortie)
     done;
-    sort ord_points !sortie
+    sort ord !sortie
 ;;
-
-(* Random function *)
-
-let rand_points nb x_max y_max =
-    let sortie = ref [] in
-    for k=0 to nb do
-        sortie := {x = Random.float(x_max); y = Random.float(y_max)}::(!sortie)
-    done;
-    !sortie
-;;
-
-
 
 (* Triangle set initialisation with the frame triangles *)
 
@@ -59,6 +48,7 @@ let init_triangle_set max_x max_y =
     let t_set =   cons
                   (cons (empty()) {p1 = p1_max; p2 = p2_max; p3 = p3_max})
                   { p1 = p3_max; p2 = p2_max; p3 = p4_max}
+
     in t_set
 ;;
 
@@ -88,26 +78,6 @@ let delaunay_stepwise point_set max_x max_y=
     done;
 ;;
 
-let delaunay_rand_color n =
-    init_display 1001 801;
-    let max_x = 1001 in
-    let max_y = 801 in
-    let point_set = (rand_points n 1000. 800.) in
-    let delaunay_stepwiset =
-        let t_set = ref (init_triangle_set max_x max_y) in
-        let p_set = ref (copy point_set) in
-        init_display max_x max_y;
-        while not (is_empty !p_set) do
-            clear_display ();
-            let curr_point = car !p_set in
-            t_set := add_point (!t_set) curr_point;
-            p_set := cdr !p_set;
-            draw_triangle_r_col !(t_set);
-        done;
-    in delaunay_stepwiset
-;;
-
-
 let test_debug n =
     init_display 1001 801;
     let max_x = 1001 in
@@ -121,12 +91,12 @@ let test_debug n =
         while not (is_empty !p_set) do
             clear_display ();
             let curr_point = car !p_set in
-            debug (!t_set) (car !p_set);
-            sleep 10;
             t_set := add_point (!t_set) curr_point;
             p_set := cdr !p_set;
             draw_triangle !(t_set);
             draw_point point_set;
+            debug (!t_set) (car !p_set);
+            sleep 10;
         done;
         !t_set
     in delaunay_stepwiset
