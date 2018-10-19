@@ -68,8 +68,8 @@ let rand_points nb x_max y_max =
     sort ord !sortie
 ;;
 
-(*let rand_m_points nb x_max y_max =
-    point_to_morph (rand_points nb x_max y_max);;*)
+let rand_m_points nb x_max y_max =
+    point_to_morph (rand_points nb x_max y_max);;
 
 (* Triangle set initialisation with the frame triangles *)
 
@@ -152,3 +152,4 @@ let test_debug n =
 ;;
 
 #use "Graphic/mouse_test.ml";;
+#use "Graphic/affichage_paul.ml";;
