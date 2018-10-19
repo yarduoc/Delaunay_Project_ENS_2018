@@ -14,6 +14,7 @@ let make_point a b = {x = a; y = b};;
 #use "Detection/matrix.ml"
 #use "Detection/detec.ml"
 #use "Change/changement.ml"
+#use "Detection/ext_detect.ml"
 #use "Graphic/display.ml";;
 
 (* Functions yet to be imported or implemented *)
@@ -76,6 +77,26 @@ let delaunay_stepwise point_set max_x max_y=
     done;
 ;;
 
+let delaunay_rand_color n =
+    init_display 1001 801;
+    let max_x = 1001 in
+    let max_y = 801 in
+    let point_set = (rand_points n 1000. 800.) in
+    let delaunay_stepwiset =
+        let t_set = ref (init_triangle_set max_x max_y) in
+        let p_set = ref (copy point_set) in
+        init_display max_x max_y;
+        while not (is_empty !p_set) do
+            clear_display ();
+            let curr_point = car !p_set in
+            t_set := add_point (!t_set) curr_point;
+            p_set := cdr !p_set;
+            draw_triangle_r_col !(t_set);
+        done;
+    in delaunay_stepwiset
+;;
+
+
 let test_debug n =
     init_display 1001 801;
     let max_x = 1001 in
@@ -89,12 +110,12 @@ let test_debug n =
         while not (is_empty !p_set) do
             clear_display ();
             let curr_point = car !p_set in
+            debug (!t_set) (car !p_set);
+            sleep 10;
             t_set := add_point (!t_set) curr_point;
             p_set := cdr !p_set;
             draw_triangle !(t_set);
             draw_point point_set;
-            debug (!t_set) (car !p_set);
-            sleep 10;
         done;
         !t_set
     in delaunay_stepwiset

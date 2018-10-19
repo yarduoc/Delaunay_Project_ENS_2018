@@ -2,11 +2,15 @@ type 'a set = 'a list;;
 
 let empty() = [];;
 
+let is_empty l = (l = []);;
+
 let cons l x = x::l;;
 
-let car l = List.hd l;;
+let car l = if is_empty l then failwith "car"
+            else List.hd l;;
 
-let cdr l = List.tl l;;
+let cdr l = if is_empty l then failwith "cdr"
+            else List.tl l;;
 
 let concat l1 l2 = l1@l2;;
 
@@ -29,8 +33,6 @@ let rec iter f l = match l with
     | [] -> ()
     | h::t -> (f(h) ; iter f t)
 ;;
-
-let is_empty l = (l = []);;
 
 let copy l = l;;
 
