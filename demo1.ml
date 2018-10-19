@@ -29,5 +29,7 @@ init_display 1000 800;;
 
 run (rand_points 30 1000. 800.);;
 
-print_string "Appuyer sur q pour quitter.";;
+print_string "Appuyer sur la touche Entrée pour continuer";;
 read_line();;
+
+run_morph (rand_m_points 20 1000. 800.) ;;

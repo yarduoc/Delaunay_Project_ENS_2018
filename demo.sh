@@ -8,3 +8,5 @@ read x
 ocaml demo1.ml
 
 read x
+
+ocaml demo2.ml

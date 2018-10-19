@@ -151,3 +151,4 @@ let test_debug n =
 ;;
 
 #use "Graphic/mouse_test.ml";;
+#use "Graphic/affichage_paul.ml";;
