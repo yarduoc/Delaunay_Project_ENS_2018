@@ -90,7 +90,9 @@ let test_debug n =
     in delaunay_stepwiset
 ;;
 
-init_display ();;
-draw_triangle (delaunay (rand_points 20 1000. 800.) 1001 801);;
+init_display 1001 800;;
+let points  = (rand_points 5000 1000. 800.);;
+draw_triangle (delaunay points 1001 801);;
+draw_point points;;
 
 sleep(100);;

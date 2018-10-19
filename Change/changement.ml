@@ -18,7 +18,7 @@ let border_aux (line_set:(point*point) set) =
     let find_aux curr_line =
     if  not (double_find !suppr_line_set curr_line) then
         if double_find !seen_line_set curr_line then
-            suppr_line_set := curr_line::(!suppr_line_set);
+            suppr_line_set := cons (!suppr_line_set) curr_line ;
     if not (double_find !seen_line_set curr_line) then
         seen_line_set := curr_line::(!seen_line_set)
     in iter find_aux line_set;
