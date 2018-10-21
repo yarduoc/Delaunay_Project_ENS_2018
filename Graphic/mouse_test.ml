@@ -65,8 +65,9 @@ let run point_set =
     let p_set = ref point_set in
     while true do
         set_color black;
+        let to_draw = delaunay !p_set 1000 800 in
         clear_graph ();
-        draw_triangle (delaunay !p_set 1000 800);
+        draw_triangle (to_draw);
         draw_point !p_set;
         wait_move p_set;
     done

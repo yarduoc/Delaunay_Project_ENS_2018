@@ -59,8 +59,8 @@ let delta_set p_set delta x_max y_max =
         let angle = Random.float (2.*.pi) in
         let dist = Random.float delta in
         let x,y = curr_point.x,curr_point.y in
-        let new_x = min ( max 0. ((cos angle)*.dist+.x) ) x_max  in
-        let new_y = min ( max 0. ((sin angle)*.dist+.y) ) y_max  in
+        let new_x = min ( max 1. ((cos angle)*.dist+.x) ) (x_max-.1.)  in
+        let new_y = min ( max 1. ((sin angle)*.dist+.y) ) (y_max-.1.)  in
         let new_point = make_point new_x new_y in
         res_p_set := cons !res_p_set (new_point,ind)
     in iter delta_aux p_set;
