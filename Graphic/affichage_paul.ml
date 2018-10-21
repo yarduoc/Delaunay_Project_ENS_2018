@@ -22,7 +22,7 @@ let wait_move t =
 
 let run_morph p_set1 =
     let t = ref 0. in
-    let p_set2 = delta_set p_set1 200. in
+    let p_set2 = delta_set p_set1 200. 1000. 800. in
     open_graph " 1000x800-0+0";
     while true do
         set_color black;

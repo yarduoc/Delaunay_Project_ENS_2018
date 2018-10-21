@@ -114,7 +114,7 @@ let delaunay_stepwise point_set max_x max_y=
 let delaunay_default p_set = delaunay p_set 1000 800;;
 
 let delaunay_switch_set p_morph_set1 p_morph_set2 t =
-    assert ( (t <= 1.) && (t >= 0.) )
+    assert ( (t <= 1.) && (t >= 0.) );
     let res_p_set = ref (empty()) in
     let ind_set = init_ind (length p_morph_set1) in
     let switch_set_aux curr_ind =
