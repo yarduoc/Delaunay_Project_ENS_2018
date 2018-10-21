@@ -76,4 +76,6 @@ let rec projection (p_set : point set) =
   sleep(100);;
 
 let p_set = rand_points_3D 0 1000. 800. 100. ;;
-draw_triangle_3D (delaunay3D p_set 1000 800 100);;
+let t_set = delaunay3D p_set 1000 800 100;;
+
+draw_triangle_3D t_set;;
