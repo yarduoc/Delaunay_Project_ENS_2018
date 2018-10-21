@@ -1,7 +1,3 @@
-open Pointtriangle3D
-open Graphics
-open Alphaset3D
-open Detec3D
 
 (* Global variables of the display module*)
 
@@ -31,8 +27,8 @@ let triangle_to_int_array triangle =
 
 (* Data plotting from int couples *)
 
-let plot_d double_i = match double_i with
-    | i1,i2 -> fill_circle i1 i2 5;;
+let plot_d triple_i = match triple_i with
+    | i1,i2,_ -> fill_circle i1 i2 5;;
 
 (* Interface functions *)
 
@@ -51,13 +47,28 @@ let rec draw_point_3D p_set =
         let curr_point = car p_set in
         let remaining_points = cdr p_set in
         begin
-            plot_d (point_to_int_double curr_point);
-            draw_point remaining_points
+            plot_d (point_to_int_triple curr_point);
+            draw_point_3D remaining_points
         end
 ;;
 
 let slope_3d point_array =
-    let (x1,y1,z1)=
+    let (x1,y1,z1)= point_array.(0) in
+    let (x2,y2,z2)= point_array.(1) in
+    let (x3,y3,z3)= point_array.(2) in
+
+      let z_min = min (z1) (min z2 z3 ) in
+      let z_max = max (z1) (max z2 z3 ) in
+
+      let y_min = min (y1) (min y2 y3 ) in
+      let y_max = max (y1) (max y2 y3 ) in
+
+      let x_min = min (x1) (min x2 x3 ) in
+      let x_max = max (x1) (max x2 x3 ) in
+      max (abs (int_of_float(atan (float_of_int ((z_max - z_min)/(x_max - x_min))) /. 3.1415926535)))
+          (abs (int_of_float(atan (float_of_int( (z_max - z_min)/(y_max - y_min))) /. 3.1415926535))) ;;
+
+
 
 
 let rec draw_triangle_3D t_set =
