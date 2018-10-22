@@ -22,6 +22,11 @@ let rec find l x = match l with
     | _::t -> find t x
 ;;
 
+let rec map f l = match l with
+    | [] -> []
+    | h::t -> (f h)::(map f t)
+;;
+
 let rec suppress refl x =
     let rec suppress_aux l = match l with
         | [] -> []
