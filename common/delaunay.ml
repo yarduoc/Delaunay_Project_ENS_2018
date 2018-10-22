@@ -15,7 +15,7 @@ open Display
 let rand_points nb x_max y_max =
     let sortie = ref (empty ()) in
     for k=0 to nb-1 do
-        sortie := (cons (!sortie) (make_point (Random.float(x_max)) (Random.float(y_max))))
+        sortie := (ord_insert (ord_points) (!sortie) (make_point (Random.float(x_max)) (Random.float(y_max))))
     done;
     !sortie
 ;;
