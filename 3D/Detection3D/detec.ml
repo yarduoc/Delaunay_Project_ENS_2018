@@ -1,3 +1,5 @@
+
+
 let is_counterclockwise (p1:point_3D) (p2:point_3D) (p3:point_3D) =
     let matrice =[|
                     [| ( p2.x -. p1.x); ( p3.x -. p1.x) |];
