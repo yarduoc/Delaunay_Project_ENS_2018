@@ -163,9 +163,9 @@ let delaunay_morph_set mp_set1 mp_set2 t max_x max_y =
     (*verification de la bonne valeur de point list*)
     assert ( (t <= 1.) && (t >= 0.) );
     (* adds maximum points to the point list *)
-    let p1 = (make_morph_point 0 0 (-1)) in
-    let p2 = (make_morph_point 0 max_y (-2)) in
-    let p3 = (make_morph_point max_x 0 (-3)) in
+    let p1 = (make_morph_point 0. 0. (-1)) in
+    let p2 = (make_morph_point 0. max_y (-2)) in
+    let p3 = (make_morph_point max_x 0. (-3)) in
     let p4 = (make_morph_point max_x max_y (-4)) in
     let mp_set_max = cons (cons (cons (cons (empty()) p1) p2) p3) p4 in
 
@@ -174,11 +174,9 @@ let delaunay_morph_set mp_set1 mp_set2 t max_x max_y =
 
     (*Donne les coordonnées d'un point intermediaire à deux points*)
     let middle_point p1 p2 t =
-        let p1_fx, p1_fy = float_of_int p1.mx, float_of_int p1.my in
-        let p2_fx, p2_fy = float_of_int p2.mx, float_of_int p2.my in
-        let new_x = (t *. p1_fx) +. ((1. -. t) *. p2_fx) in
-        let new_y = (t *. p1_fy) +. ((1. -. t) *. p2_fy) in
-        make_morph_point (int_of_float new_x) (int_of_float new_y) p1.label
+        let new_x = (t *. p1.mx) +. ((1. -. t) *. p2.mx) in
+        let new_y = (t *. p1.my) +. ((1. -. t) *. p2.my) in
+        make_morph_point new_x new_y p1.label
     in
     (*Donne le mp_set intermédiaire*)
     let middle_mp_set mp_set1 mp_set2 =
