@@ -110,8 +110,8 @@ let delta_set mp_set delta x_max y_max =
         let distance = Random.float delta in
         let x = m_point.mx in
         let y = m_point.my in
-        let delta_x = (cos angle) *. distance +. (float_of_int x) in
-        let delta_y = (sin angle) *. distance +. (float_of_int y) in
+        let delta_x = (cos angle) *. distance +. x in
+        let delta_y = (sin angle) *. distance +. y in
         let new_x = min (max 1 (x + delta_x)) ((float_of_int x_max) - 1.) in
         let new_y = min (max 1 (y + delta_y)) ((float_of_int y_max) - 1.) in
         make_morph_point new_x new_y m_point.label
