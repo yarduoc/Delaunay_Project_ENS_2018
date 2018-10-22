@@ -93,7 +93,7 @@ let run point_set =
     while true do
         set_color black;
         clear_graph ();
-        draw_triangle (delaunay !p_set 1000 800);
+        draw_triangle (delaunay !p_set 800 600);
         draw_point !p_set;
         wait_move p_set;
     done
