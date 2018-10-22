@@ -7,7 +7,7 @@ let double_find p_set p = let p1,p2 = p in (find p_set p || find p_set (p2,p1)) 
 let get_line (tri_set:triangle_set) =
     let result_line_set = ref (empty()) in
     let add_line curr_tri =
-        result_line_set := (curr_tri.p1,curr_tri.p2) :: (curr_tri.p2,curr_tri.p3) :: (curr_tri.p3,curr_tri.p1) :: (!result_line_set)
+        result_line_set := cons ( cons ( cons (!result_line_set) (curr_tri.p1,curr_tri.p2) ) (curr_tri.p2,curr_tri.p3) ) (curr_tri.p3,curr_tri.p1)
     in iter add_line tri_set; !result_line_set
 ;;
 
