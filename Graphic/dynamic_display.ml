@@ -1,9 +1,9 @@
-open Alphaset
+(*open Alphaset
 open Pointtriangle
 open Graphics
 open Detec
-open Delaunay
-
+open Delaunay *)
+exception Close;;
 exception End;;
 let wait_move p_set =
     let t_set = ref (empty ()) in
@@ -16,7 +16,7 @@ let wait_move p_set =
             if sqr_dist !point_a_deplacer mouse_origin < 100. then
                 begin
                 p_set := del !p_set !point_a_deplacer;
-                t_set := (delaunay !p_set 1000 800);
+                t_set := (delaunay !p_set 800 600);
                 p_set := ord_insert ord_points !p_set !point_a_deplacer;
                 while true do
                     let released = Graphics.wait_next_event [Graphics.Button_up; Graphics.Mouse_motion] in
@@ -24,14 +24,14 @@ let wait_move p_set =
                     p_set := del !p_set !point_a_deplacer;
                     p_set := ord_insert ord_points !p_set mouse_destination;
                     match released with
-                        | status when not status.button -> raise End
                         | status when released.Graphics.mouse_x < 0 ||
-                                      released.Graphics.mouse_x > 1000 ||
+                                      released.Graphics.mouse_x > 800 ||
                                       released.Graphics.mouse_y < 0 ||
-                                      released.Graphics.mouse_y > 800
+                                      released.Graphics.mouse_y > 600
                                       ->
                                       p_set := ord_insert ord_points !p_set !point_a_deplacer;
                                       p_set := del !p_set mouse_destination;
+                        | status when not status.button -> raise End
                         | status -> begin
                                         let affiche = add_point !t_set mouse_destination in
                                         point_a_deplacer := mouse_destination;
@@ -59,19 +59,23 @@ let wait_move p_set =
                             end;
                     end;
                 if pressed.key = 'q' then
-                    close_graph();
+                    raise Close
             end
     done;
     with End -> ()
 ;;
 let run point_set =
+    auto_synchronize false;
     let p_set = ref point_set in
     while true do
         set_color black;
-        let to_draw = delaunay !p_set 1000 800 in
+        let to_draw = delaunay !p_set 800 600 in
         clear_graph ();
         draw_triangle (to_draw);
         draw_point !p_set;
-        wait_move p_set;
+        synchronize ();
+        try
+            wait_move p_set;
+        with | End -> () |Close -> failwith "out";
     done
 ;;

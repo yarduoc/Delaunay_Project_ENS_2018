@@ -2,14 +2,14 @@
 
 open Graphics;;
 
-#use "pointtriangle.ml";;
-#use "alphaset.ml";;
-#use "pointtriangle3D.ml";;
-#use "Detection3D/matrix.ml";;
-#use "Detection3D/detec.ml";;
-#use "Change3D/changement.ml";;
-#use "calculus.ml";;
-#use "Graphic3D/display3D.ml";;
+#use "common/pointtriangle.ml";;
+#use "common/alphaset.ml";;
+#use "3D/pointtriangle3D.ml";;
+#use "3D/Detection3D/matrix.ml";;
+#use "3D/Detection3D/detec.ml";;
+#use "3D/Change3D/changement.ml";;
+#use "3D/calculus.ml";;
+#use "3D/Graphic3D/display3D.ml";;
 
 (*
 let project_point_3D p_3D = make_point (p_3D.x) (p_3D.y);;

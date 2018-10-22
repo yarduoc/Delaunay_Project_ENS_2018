@@ -1,9 +1,9 @@
 (*open Pointtriangle*)
-#load "graphics.cma"
-open Graphics
+#load "graphics.cma";;
+open Graphics;;
 (*open Alphaset
 open Detec*)
-
+auto_synchronize false;;
 (* Global variables of the display module*)
 
 let width  = ref 0;;
@@ -42,8 +42,8 @@ let rand_color () =
     let r,g,b = Random.int 256, Random.int 256, Random.int 256 in
     set_color (rgb r g b);;
 
-(*let rec draw_ctriangle ct_set =
-    if is_empty ct_set
+let rec draw_triangle_r_col t_set =
+    if is_empty t_set
         then ()
     else
         let curr_triangle = car t_set in
@@ -72,7 +72,7 @@ let init_display width height =
 
 let rec draw_point p_set =
     if is_empty p_set
-        then ()
+        then synchronize ()
     else
         let curr_point = car p_set in
         let remaining_points = cdr p_set in
@@ -84,7 +84,7 @@ let rec draw_point p_set =
 
 let rec draw_triangle t_set =
     if is_empty t_set
-        then ()
+        then synchronize ()
     else
         let curr_triangle = car t_set in
         let other_triangles = cdr t_set in
