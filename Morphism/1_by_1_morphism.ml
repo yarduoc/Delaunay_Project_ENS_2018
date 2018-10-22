@@ -56,10 +56,9 @@ let color_matching_label color_set label =
     let res_color = ref (0,0,0) in
     let matching_aux curr_color =
         let curr_label = snd curr_color in
-        if curr_label = label then res_color := curr_color;
+        if curr_label = label then res_color := fst curr_color;
     in iter matching_aux color_set;
     !res_color;;
-
 
 exception Notin of (morph_point set);;
 
