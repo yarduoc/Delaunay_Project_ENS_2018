@@ -1,7 +1,8 @@
-open Pointtriangle
+(*open Pointtriangle*)
+#load "graphics.cma"
 open Graphics
-open Alphaset
-open Detec
+(*open Alphaset
+open Detec*)
 
 (* Global variables of the display module*)
 
