@@ -36,12 +36,12 @@ let suppr_border tri_set suppr_set =
 ;;
 
 
-let add_point tri_set new_point =
+let add_point_3D tri_set new_point =
     let modify_tri_set = to_modify_tri tri_set new_point in
     let new_border = border modify_tri_set in
     let result_tri_set = ref (suppr_border tri_set modify_tri_set) in
     let add_tri_aux curr_line =
-        let p1,p2 = curr_line in
+        let (p1,p2) = curr_line in
         let new_tri = make_triangle_3D p1 p2 new_point in
         result_tri_set := cons (!result_tri_set) new_tri
     in
