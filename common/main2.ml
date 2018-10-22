@@ -169,8 +169,8 @@ let delaunay_morph_set mp_set1 mp_set2 t max_x max_y =
     let p4 = (make_morph_point max_x max_y (-4)) in
     let mp_set_max = cons (cons (cons (cons (empty()) p1) p2) p3) p4 in
 
-    let mp_set1 = concat mp_set_max mp_set1 in
-    let mp_set2 = concat mp_set_max mp_set2 in
+    let new_mp_set1 = concat mp_set_max mp_set1 in
+    let new_mp_set2 = concat mp_set_max mp_set2 in
 
     (*Donne les coordonnées d'un point intermediaire à deux points*)
     let middle_point p1 p2 t =
@@ -179,11 +179,14 @@ let delaunay_morph_set mp_set1 mp_set2 t max_x max_y =
         make_morph_point new_x new_y p1.label
     in
     (*Donne le mp_set intermédiaire*)
-    let middle_mp_set mp_set1 mp_set2 =
+    let middle_mp_set m_p_set1 m_p_set2 =
         let new_mp_set = ref (empty()) in
-        for label = 1 to length mp_set1 do
-            let p1 = point_matching_label mp_set1 label in
-            let p2 = point_matching_label mp_set2 label in
+        for label = 1 to length m_p_set1 do
+            print_string "test 1";
+            print_int label;
+            print_newline ();
+            let p1 = point_matching_label m_p_set1 label in
+            let p2 = point_matching_label m_p_set2 label in
             new_mp_set := cons !new_mp_set (middle_point p1 p2 0.5)
         done;
         !new_mp_set
@@ -203,13 +206,21 @@ let delaunay_morph_set mp_set1 mp_set2 t max_x max_y =
         let label2 = (point_matching_coordinates new_mp_set p2).label in
         let label3 = (point_matching_coordinates new_mp_set p3).label in
 
-        let set1_p1 = point_matching_label mp_set1 label1 in
-        let set1_p2 = point_matching_label mp_set1 label2 in
-        let set1_p3 = point_matching_label mp_set1 label3 in
+        print_string "test 1";
+        print_newline ();
+        let set1_p1 = point_matching_label new_mp_set1 label1 in
+        let set1_p2 = point_matching_label new_mp_set1 label2 in
+        let set1_p3 = point_matching_label new_mp_set1 label3 in
 
-        let set2_p1 = point_matching_label mp_set2 label1 in
-        let set2_p2 = point_matching_label mp_set2 label2 in
-        let set2_p3 = point_matching_label mp_set2 label3 in
+        print_string "test 2";
+        print_newline ();
+
+        let set2_p1 = point_matching_label new_mp_set2 label1 in
+        let set2_p2 = point_matching_label new_mp_set2 label2 in
+        let set2_p3 = point_matching_label new_mp_set2 label3 in
+
+        print_string "test 3";
+        print_newline ();
 
         let new_p1 = middle_point set1_p1 set2_p1 t in
         let new_p2 = middle_point set1_p2 set2_p2 t in
@@ -224,8 +235,8 @@ let delaunay_morph_set mp_set1 mp_set2 t max_x max_y =
 
 
 let rset1 = rand_m_points 10 1000. 800.;;
-let rset2 = delta_set rset1 50. 1000 800;;
-let f t = delaunay_morph_set rset1 rset2 t 1000 800;;
+let rset2 = delta_set rset1 50. 1000. 800.;;
+let f t = delaunay_morph_set rset1 rset2 t 1000. 800.;;
 init_display 1000 800;;
 let g ()=
     while true do
