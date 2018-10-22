@@ -20,7 +20,7 @@ let border_aux (line_set:(point*point) set) =
         if double_find !seen_line_set curr_line then
             suppr_line_set := cons (!suppr_line_set) curr_line ;
     if not (double_find !seen_line_set curr_line) then
-        seen_line_set := curr_line::(!seen_line_set)
+        seen_line_set := cons (!seen_line_set)  curr_line
     in iter find_aux line_set;
     let suppr_aux curr_line =
         if double_find !suppr_line_set curr_line then
@@ -47,7 +47,7 @@ let add_point tri_set new_point =
     let add_tri_aux curr_line =
         let p1,p2 = curr_line in
         let new_tri = make_triangle p1 p2 new_point in
-        result_tri_set := new_tri::(!result_tri_set)
+        result_tri_set := cons (!result_tri_set) new_tri
     in
     iter add_tri_aux new_border;
     !result_tri_set
