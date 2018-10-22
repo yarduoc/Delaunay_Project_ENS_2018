@@ -175,6 +175,7 @@ let draw_triangle_set_3D t_set max_x max_y =
           draw_triangle_3D other_triangles
     end;
     in
+    synchronize ();
     draw_triangle_3D t_set
 ;;
 

@@ -91,3 +91,4 @@ let p_set = generate_points_3D 50 800. 800. 100. ;;
 let t_set = delaunay3D p_set 800 800 100;;
 
 draw_triangle_set_3D t_set 800 800;;
+synchronize();;
