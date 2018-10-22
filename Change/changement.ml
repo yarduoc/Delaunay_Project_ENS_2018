@@ -1,6 +1,6 @@
-open Alphaset
+(*open Alphaset
 open Pointtriangle
-open Detec
+open Detec *)
 
 let double_find p_set p = let p1,p2 = p in (find p_set p || find p_set (p2,p1)) ;;
 
