@@ -3,14 +3,13 @@ let screen_height = ref 600;;
 
 Random.self_init ();;
 
-#use "common/alphaset.ml"
-#use "pointtriangle.ml"
-#use "Detection/matrix.ml"
-#use "Detection/detec.ml"
-#use "Detection/ext_detect.ml"
-#use "Change/changement.ml"
-#use "Morphism/1_by_1_morphism.ml"
-#use "Morphism/2set_morphism.ml"
+#use "common/alphaset.ml";;
+#use "common/pointtriangle.ml";;
+#use "Detection/matrix.ml";;
+#use "Detection/detec.ml";;
+#use "Change/changement.ml";;
+#use "Morphism/1_by_1_morphism.ml";;
+#use "Morphism/2set_morphism.ml";;
 #use "Graphic/display.ml";;
 
 
@@ -79,7 +78,7 @@ let delaunay_stepwise point_set max_x max_y=
     done;
 ;;
 
-let delaunay_default p_set = delaunay p_set 1000 800;;
+let delaunay_default p_set = delaunay p_set 800 600;;
 (*
 let delaunay_switch_set p_morph_set1 p_morph_set2 t =
     assert ( (t <= 1.) && (t >= 0.) );
@@ -105,7 +104,6 @@ let delaunay_morph_set p_m_set1 p_m_set2 t max_x max_y =
     let p3_max = ({x = float_of_int max_x; y = 0.},-3) in
     let p4_max = ({x = float_of_int max_x; y = float_of_int max_y},-4) in
     let p_set_max = cons (cons (cons (cons (empty()) p1_max) p2_max) p3_max) p4_max in
-
     let p_morph_set1 = concat p_set_max p_m_set1 in
     let p_morph_set2 = concat p_set_max p_m_set2 in
     (*Donne les coordonnées d'un point intermediaire à deux points*)
@@ -134,26 +132,20 @@ let delaunay_morph_set p_m_set1 p_m_set2 t max_x max_y =
         let p1 = curr_triangle.p1 in
         let p2 = curr_triangle.p2 in
         let p3 = curr_triangle.p3 in
-
         let ind1 = snd (reci_morph_fun new_m_set p1) in
         let ind2 = snd (reci_morph_fun new_m_set p2) in
         let ind3 = snd (reci_morph_fun new_m_set p3) in
-
         let set1_p1 = fst (morph_fun p_morph_set1 ind1) in
         let set1_p2 = fst (morph_fun p_morph_set1 ind2) in
         let set1_p3 = fst (morph_fun p_morph_set1 ind3) in
-
         let set2_p1 = fst (morph_fun p_morph_set2 ind1) in
         let set2_p2 = fst (morph_fun p_morph_set2 ind2) in
         let set2_p3 = fst (morph_fun p_morph_set2 ind3) in
-
         let new_p1 = new_coord set1_p1 set2_p1 t in
         let new_p2 = new_coord set1_p2 set2_p2 t in
         let new_p3 = new_coord set1_p3 set2_p3 t in
-
         let new_triangle = make_triangle new_p1 new_p2 new_p3 in
         res_triangle_set := cons !res_triangle_set new_triangle
-
     in iter morph_triangle_set  middle_m_delaunay;
     !res_triangle_set
 ;;
@@ -182,9 +174,6 @@ let delaunay_morph_set mp_set1 mp_set2 t max_x max_y =
     let middle_mp_set m_p_set1 m_p_set2 =
         let new_mp_set = ref (empty()) in
         for label = 1 to length m_p_set1 do
-            print_string "test 1";
-            print_int label;
-            print_newline ();
             let p1 = point_matching_label m_p_set1 label in
             let p2 = point_matching_label m_p_set2 label in
             new_mp_set := cons !new_mp_set (middle_point p1 p2 0.5)
@@ -227,10 +216,10 @@ let delaunay_morph_set mp_set1 mp_set2 t max_x max_y =
 ;;
 
 
-let rset1 = rand_m_points 10 1000. 800.;;
-let rset2 = delta_set rset1 0. 1000. 800.;;
-let f t = delaunay_morph_set rset1 rset2 t 1000. 800.;;
-init_display 1000 800;;
+let rset1 = rand_m_points 100 800. 600.;;
+let rset2 = delta_set rset1 50. 800. 600.;;
+let f t = delaunay_morph_set rset1 rset2 t 800. 600.;;
+init_display 800 600;;
 let g ()=
     while true do
         for k = 0 to 20 do
@@ -238,18 +227,19 @@ let g ()=
             let to_draw = f t in
             clear_display ();
             draw_triangle to_draw;
-            sleep 1;
+            sleep 0;
         done;
         for k = 20 downto 0 do
             let t = (float_of_int k) /. 20. in
             let to_draw = f t in
             clear_display ();
             draw_triangle to_draw;
-            sleep 1;
+            sleep 0;
         done;
-    done;
+        let s = Graphics.wait_next_event [Key_pressed;Poll] in
+        if s.keypressed then failwith "sortie_de_boucle";
+    done
 ;;
 
-#use "Graphic/mouse_test.ml";; (*
+#use "Graphic/dynamic_display.ml";;
 #use "Graphic/affichage_paul.ml";;
-*)
