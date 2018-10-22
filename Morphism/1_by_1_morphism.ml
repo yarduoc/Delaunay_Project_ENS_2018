@@ -59,10 +59,13 @@ let morph_fun morph_set ind =
         if curr_ind = ind then res_m_point := curr_point;
     in iter morph_aux morph_set;
     !res_m_point;; *)
+exception Notin of (morph_point set);;
 
 let point_matching_label mp_set label =
     let match_label morph_point = (morph_point.label = label) in
-    find_pred match_label mp_set
+    try
+        find_pred match_label mp_set
+    with _ -> (print_int label;  raise (Notin mp_set);)
 ;;
 
 (* fonction qui à des coordonnées donne le m_point*)
@@ -110,10 +113,10 @@ let delta_set mp_set delta x_max y_max =
         let distance = Random.float delta in
         let x = m_point.mx in
         let y = m_point.my in
-        let delta_x = (cos angle) *. distance +. (float_of_int x) in
-        let delta_y = (sin angle) *. distance +. (float_of_int y) in
-        let new_x = min (max 1 (x + delta_x)) ((float_of_int x_max) - 1.) in
-        let new_y = min (max 1 (y + delta_y)) ((float_of_int y_max) - 1.) in
+        let delta_x = (cos angle) *. distance +.  x in
+        let delta_y = (sin angle) *. distance +.  y in
+        let new_x = min (max 1. (x +. delta_x)) (x_max -. 1.) in
+        let new_y = min (max 1. (y +. delta_y)) (y_max -. 1.) in
         make_morph_point new_x new_y m_point.label
     in map get_delta_shifted_point mp_set
 ;;
