@@ -29,11 +29,14 @@ ocamlc -c -I Compilables -o Compilables/delaunay.cmo common/delaunay.ml
 ocamlc -c -I Compilables -o Compilables/affichagemorph.cmi Compilables/affichagemorph.mli
 ocamlc -c -I Compilables -o Compilables/affichagemorph.cmo Graphic/affichagemorph.ml
 
-ocamlc -c -I Compilables -o Compilables/dynamicdisplay.cmi Compilables/dynamicdisplay.mli
-ocamlc -c -I Compilables -o Compilables/dynamicdisplay.cmo Graphic/dynamicdisplay.ml
+ocamlc -c -I Compilables -o Compilables/dynamic_display.cmi Compilables/dynamic_display.mli
+ocamlc -c -I Compilables -o Compilables/dynamic_display.cmo Graphic/dynamic_display.ml
 
 
 ocamlc -a  Compilables/matrix.cmo Compilables/alphaset.cmo Compilables/pointtriangle.cmo Compilables/detec.cmo -o Compilables/tools.cma
-ocamlc -a  Compilables/changement.cmo Compilables/stepbystepmorphism.cmo Compilables/display.cmo Compilables/delaunay.cmo Compilables/dynamicdisplay.cmo -o Compilables/uppertools.cma
+ocamlc -a  Compilables/changement.cmo Compilables/stepbystepmorphism.cmo Compilables/display.cmo Compilables/delaunay.cmo Compilables/dynamic_display.cmo -o Compilables/uppertools.cma
 
-ocaml Compilables/main.ml
+ocaml Compilables/demo1.ml 
+#ocaml Compilables/main.ml
+
+#ocaml 3D/project.ml

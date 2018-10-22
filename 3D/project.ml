@@ -3,8 +3,8 @@
 open Graphics;;
 
 
-#use "../common/alphaset.ml";;
-#use "../common/pointtriangle.ml";;
+#use "alphaset.ml";;
+#use "pointtriangle.ml";;
 #use "pointtriangle3D.ml";;
 #use "Detection3D/matrix.ml";;
 #use "Detection3D/detec.ml";;
@@ -80,4 +80,7 @@ let p_set = rand_points_3D 1000 800. 800. 100. ;;
 let t_set = delaunay3D p_set 800 800 100;;
 
 draw_triangle_set_3D t_set 800 800;;
+
+let _ = Graphics.wait_next_event [Key_pressed] in ();;
+
 synchronize();;

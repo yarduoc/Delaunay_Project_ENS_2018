@@ -93,10 +93,7 @@ let rec slope_function t_set angle_set max_x max_y=
         let a_max = maxi (!angle_set) in
         let a_min = mini (!angle_set) in
 
-        print_float a_max;print_float a_min;
-
-
-        let f_slope point_array =
+          let f_slope point_array =
         begin
           let p1 = point_array.(0) in
           let p2 = point_array.(1) in
