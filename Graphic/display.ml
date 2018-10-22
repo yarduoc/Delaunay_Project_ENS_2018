@@ -1,15 +1,11 @@
-open Pointtriangle
-open Graphics
-open Alphaset
-open Detec
-open Stepbystepmorphism
+open Pointtriangle;;
+open Graphics;;
+open Alphaset;;
+open Detec;;
+open Stepbystepmorphism;;
+
 
 auto_synchronize false;;
-(* Global variables of the display module*)
-
-let width  = ref 0;;
-let height = ref 0;;
-
 
 (* Data conversion functions for Graphics compatibility *)
 
