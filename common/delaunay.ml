@@ -1,35 +1,12 @@
 let screen_width = ref 800;;
 let screen_height = ref 800;;
 
-open Graphics;;
+open Graphics
+open Alphaset
+open Pointtriangle
+open Detec
+open Changement
 
-
-let print_point point =
-    print_string "(";
-    print_float point.x;
-    print_string ";";
-    print_float point.y;
-    print_string ")"
-;;
-
-let print_triangle t =
-    print_string "Triangle : p1 = ";
-    print_point t.p1;
-    print_string " p2 = ";
-    print_point t.p2;
-    print_string " p3 = ";
-    print_point t.p3;
-    print_newline ()
-;;
-
-let print_triangle_set t_set = iter print_triangle t_set;;
-
-
-let ord_points p1 p2 =
-    if p1.x = p2.x then
-        p1.y < p2.y
-    else p1.x < p2.x
-;;
 
 
 (* Functions yet to be imported or implemented *)
@@ -86,9 +63,7 @@ let delaunay_stepwise point_set max_x max_y=
         p_set := cdr !p_set;
         draw_triangle !(t_set);
         draw_point point_set;
-    done;
-    !t_set
-;;
+    done;;
 
 let delaunay_default p_set = delaunay p_set 1000 800;;
 
