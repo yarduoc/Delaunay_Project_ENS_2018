@@ -1,5 +1,8 @@
-#load "graphics.cma"
+open Alphaset
+open Pointtriangle
 open Graphics
+open Detec
+open Delaunay
 
 exception End;;
 let wait_move p_set =

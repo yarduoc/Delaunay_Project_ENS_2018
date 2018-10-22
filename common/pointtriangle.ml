@@ -1,3 +1,4 @@
+
 #use "common/alphaset.ml"
 
 type point = {x: float; y: float};;
@@ -6,10 +7,12 @@ type triangle = { p1 : point; p2 : point ; p3 : point};;
 
 type point_set = point list;;
 type morph_point_set = morph_point set;;
+
 type triangle_set = triangle list;;
 
 let make_triangle a b c = {p1 = a; p2 = b; p3 = c};;
 let make_point a b = {x = a; y = b};;
+
 let make_morph_point a b l = {mx = a; my = b; label = l};;
 
 let point_to_morph_point point label =

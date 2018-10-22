@@ -1,6 +1,7 @@
-#load "graphics.cma"
+open Pointtriangle
 open Graphics
-#use "Detection/detec.ml"
+open Alphaset
+open Detec
 
 (* Global variables of the display module*)
 
@@ -10,8 +11,10 @@ let height = ref 0;;
 
 (* Data conversion functions for Graphics compatibility *)
 
-let sleep k = let p = ref 0 in
-    for l = 0 to (k*10000000) do p:= 1+1 done
+let sleep k =
+    for l = 0 to (k*10000000) do
+        ()
+    done
 ;;
 
 let point_to_int_double point =
