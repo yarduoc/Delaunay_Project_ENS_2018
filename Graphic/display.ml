@@ -42,8 +42,8 @@ let rand_color () =
     let r,g,b = Random.int 256, Random.int 256, Random.int 256 in
     set_color (rgb r g b);;
 
-let rec draw_triangle_r_col t_set =
-    if is_empty t_set
+let rec draw_ctriangle ct_set =
+    if is_empty ct_set
         then ()
     else
         let curr_triangle = car t_set in
@@ -55,6 +55,9 @@ let rec draw_triangle_r_col t_set =
             fill_poly triangle_i;
             draw_triangle_r_col other_triangles
         end
+
+
+
 ;;
 
 (*Drawing function*)

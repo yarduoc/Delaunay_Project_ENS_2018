@@ -51,14 +51,16 @@ let morph_set_to_point_set mp_set =
 
 
 (*fonction qui donne le point associé à un index*)
-(*
-let morph_fun morph_set ind =
-    let res_m_point = ref (car morph_set) in
-    let morph_aux curr_point =
-        let curr_ind = snd curr_point in
-        if curr_ind = ind then res_m_point := curr_point;
-    in iter morph_aux morph_set;
-    !res_m_point;; *)
+
+let color_matching_label color_set label =
+    let res_color = ref (0,0,0) in
+    let matching_aux curr_color =
+        let curr_label = snd curr_color in
+        if curr_label = label then res_color := curr_color;
+    in iter matching_aux color_set;
+    !res_color;;
+
+
 exception Notin of (morph_point set);;
 
 let point_matching_label mp_set label =
