@@ -1,17 +1,10 @@
 
 (* Global variables of the display module*)
 
-let width  = ref 0;;
-let height = ref 0;;
-
+let pi = 3.1415926535;;
 
 (* Data conversion functions for Graphics compatibility *)
 
-let sleep k =
-    for l = 0 to (k*10000000) do
-        ()
-    done
-;;
 
 let point_to_int_triple point =
 ( (int_of_float point.x),
@@ -116,7 +109,7 @@ let rec slope_function t_set angle_set max_x max_y=
           let normale = prod_vect vect1 vect2 in
 
           let angle =  (asin (norme (prod_vect uz normale) /. (norme normale))) in
-           (angle -. a_min) /. (a_max -. a_min)
+           cos ((angle -. a_min) *. pi /. (2. *. (a_max -. a_min)))
         end;
         in
         (f_slope)

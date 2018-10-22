@@ -2,26 +2,16 @@
 
 open Graphics;;
 
-#use "common/pointtriangle.ml";;
-#use "common/alphaset.ml";;
-#use "3D/pointtriangle3D.ml";;
-#use "3D/Detection3D/matrix.ml";;
-#use "3D/Detection3D/detec.ml";;
-#use "3D/Change3D/changement.ml";;
-#use "3D/calculus.ml";;
-#use "3D/Graphic3D/display3D.ml";;
 
-(*
-let project_point_3D p_3D = make_point (p_3D.x) (p_3D.y);;
+#use "../common/alphaset.ml";;
+#use "../common/pointtriangle.ml";;
+#use "pointtriangle3D.ml";;
+#use "Detection3D/matrix.ml";;
+#use "Detection3D/detec.ml";;
+#use "Change3D/changement.ml";;
+#use "calculus.ml";;
+#use "Graphic3D/display3D.ml";;
 
-let rec projection (p_set : point set) =
-
-  if is_empty p_set
-    then empty()
-    else cons (projection (cdr p_set)) (project_point_3D (car p_set))
-  ;;
-
-*)
 
   let screen_width = ref 800;;
   let screen_height = ref 600;;
@@ -35,7 +25,7 @@ let rec projection (p_set : point set) =
 
   let rand_points_3D nb x_max y_max z_max =   (*Is 3D*)
       let sortie = ref (empty ()) in
-      let f x  y = 100.*.cos(x*.y/.400.) in
+      let f x  y = 1400. *. (cos((x -. 400.) /. 400.) +. cos((y -. 400.) /. 400.) ) in
       for k=0 to nb-1 do
       let x_point = (Random.float(x_max))
       and y_point  = (Random.float(y_max)) in
@@ -49,7 +39,7 @@ let rec projection (p_set : point set) =
       let sortie = ref (empty ()) in
       let x_step = x_max /. (float_of_int nb) in
       let y_step = y_max /. (float_of_int nb) in
-      let f x  y =  (cos((x -. 400.) /. 400.) +. cos((y -. 400.) /. 400.) )in
+      let f x  y =  (cos((x -. 400.) /. 400.) +. cos((y -. 400.) /. 400.) ) in
       for i=0 to nb-1 do
         for j=0 to nb-1 do
           let x_point = 0.01 +. float_of_int(i) *. x_step in
@@ -87,7 +77,7 @@ let rec projection (p_set : point set) =
 
   init_display 800 800;;
 
-let p_set = generate_points_3D 50 800. 800. 100. ;;
+let p_set = rand_points_3D 1000 800. 800. 100. ;;
 let t_set = delaunay3D p_set 800 800 100;;
 
 draw_triangle_set_3D t_set 800 800;;
