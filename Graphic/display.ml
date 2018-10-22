@@ -81,7 +81,7 @@ let rec draw_point p_set =
 
 let rec draw_triangle t_set =
     if is_empty t_set
-        then synchronize
+        then synchronize ()
     else
         let curr_triangle = car t_set in
         let other_triangles = cdr t_set in

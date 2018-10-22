@@ -65,6 +65,7 @@ let wait_move p_set =
     with End -> ()
 ;;
 let run point_set =
+    auto_synchronize false;
     let p_set = ref point_set in
     while true do
         set_color black;
@@ -72,6 +73,7 @@ let run point_set =
         clear_graph ();
         draw_triangle (to_draw);
         draw_point !p_set;
+        synchronize ();
         try
             wait_move p_set;
         with | End -> () |Close -> failwith "out";
