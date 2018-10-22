@@ -49,7 +49,7 @@ let rec projection (p_set : point set) =
       let sortie = ref (empty ()) in
       let x_step = x_max /. (float_of_int nb) in
       let y_step = y_max /. (float_of_int nb) in
-      let f x  y = 20. *. sin( (x +. y) /. 3000.) in
+      let f x  y =  cos(x /. 200.) +. cos(y /. 200.) in
       for i=0 to nb-1 do
         for j=0 to nb-1 do
           let x_point = 0.01 +. float_of_int(i) *. x_step in
@@ -90,4 +90,4 @@ let rec projection (p_set : point set) =
 let p_set = generate_points_3D 50 800. 800. 100. ;;
 let t_set = delaunay3D p_set 800 800 100;;
 
-draw_triangle_set_3D t_set;;
+draw_triangle_set_3D t_set 800 800;;
