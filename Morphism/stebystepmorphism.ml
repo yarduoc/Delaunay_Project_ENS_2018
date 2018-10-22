@@ -54,6 +54,16 @@ let reci_morph_fun morph_set v_point =
         !res_m_point
     else failwith "point not in set";;
 
+let point_matching_coordinates mp_set point =
+    let x, y = point.x, point.y in
+    let match_coords morph_point =  morph_point.mx = x
+                                     && morph_point.my = y
+    in
+    find_pred (match_coords) mp_set
+;;
+
+(*fonction qui a un mp_set crée une variation*)
+(*
 let delta_set p_set delta x_max y_max =
     let res_p_set = ref (empty()) in
     let delta_aux curr_m_point =
@@ -67,4 +77,18 @@ let delta_set p_set delta x_max y_max =
         res_p_set := cons !res_p_set (new_point,ind)
     in iter delta_aux p_set;
     !res_p_set
+;; *)
+
+let delta_set mp_set delta x_max y_max =
+    let get_delta_shifted_point m_point =
+        let angle    = Random.float (2. *. pi) in
+        let distance = Random.float delta in
+        let x = m_point.mx in
+        let y = m_point.my in
+        let delta_x = (cos angle) *. distance +. x in
+        let delta_y = (sin angle) *. distance +. y in
+        let new_x = min (max 1 (x + delta_x)) ((float_of_int x_max) - 1.) in
+        let new_y = min (max 1 (y + delta_y)) ((float_of_int y_max) - 1.) in
+        make_morph_point new_x new_y m_point.label
+    in map get_delta_shifted_point mp_set
 ;;
