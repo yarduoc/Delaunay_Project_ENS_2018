@@ -3,23 +3,14 @@
 open Graphics;;
 
 
-#use "../common/alphaset.ml";;
-#use "../common/pointtriangle.ml";;
-#use "pointtriangle3D.ml";;
-#use "Detection3D/matrix.ml";;
-#use "Detection3D/detec.ml";;
-#use "Change3D/changement.ml";;
-#use "calculus.ml";;
-#use "Graphic3D/display3D.ml";;
-
-
-  let screen_width = ref 800;;
-  let screen_height = ref 600;;
-
-  (* Functions yet to be imported or implemented *)
-  let sleep k =
-      for l = 0 to (k*10000000) do () done
-  ;;
+#use "common/alphaset.ml";;
+#use "common/pointtriangle.ml";;
+#use "3D/pointtriangle3D.ml";;
+#use "3D/Detection3D/matrix.ml";;
+#use "3D/Detection3D/detec.ml";;
+#use "3D/Change3D/changement.ml";;
+#use "3D/calculus.ml";;
+#use "3D/Graphic3D/display3D.ml";;
 
   (* Random function *)
 

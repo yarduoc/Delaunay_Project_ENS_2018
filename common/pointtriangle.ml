@@ -20,11 +20,11 @@ let morph_point_to_point m_point = make_point m_point.mx m_point.my;;
 
 let ord_points p1 p2 =
     if p1.x = p2.x then
-        p1.y < p2.y
+        p1.y <= p2.y
     else p1.x < p2.x
 ;;
 
-let ord_m_points p1 p2 = p1.label < p2.label;;
+let ord_m_points p1 p2 = p1.label <= p2.label;;
 
 let print_point point =
     print_string "(";

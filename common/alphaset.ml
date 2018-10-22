@@ -64,6 +64,7 @@ let rec sort ord l =
 
 let rec ord_insert ord l a = match l with
     | [] -> [a]
+    | h::t when ord h a && ord a h -> l
     | h::t when ord h a -> h::(ord_insert ord t a)
     |l -> a::l;;
 
