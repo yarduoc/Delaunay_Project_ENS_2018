@@ -81,10 +81,10 @@ let reci_morph_fun morph_set v_point =
 
 let point_matching_coordinates mp_set point =
     let x, y = point.x, point.y in
-    let match_coords x y morph_point =  morph_point.mx = x
+    let match_coords morph_point =  morph_point.mx = x
                                      && morph_point.my = y
     in
-    find_pred (match_coords x y) mp_set
+    find_pred (match_coords) mp_set
 ;;
 
 (*fonction qui a un mp_set crée une variation*)
