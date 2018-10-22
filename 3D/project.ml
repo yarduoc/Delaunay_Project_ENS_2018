@@ -11,18 +11,6 @@ open Graphics;;
 #use "calculus.ml";;
 #use "Graphic3D/display3D.ml";;
 
-(*
-let project_point_3D p_3D = make_point (p_3D.x) (p_3D.y);;
-
-let rec projection (p_set : point set) =
-
-  if is_empty p_set
-    then empty()
-    else cons (projection (cdr p_set)) (project_point_3D (car p_set))
-  ;;
-
-*)
-
   let screen_width = ref 800;;
   let screen_height = ref 600;;
 
@@ -35,7 +23,7 @@ let rec projection (p_set : point set) =
 
   let rand_points_3D nb x_max y_max z_max =   (*Is 3D*)
       let sortie = ref (empty ()) in
-      let f x  y = 100.*.cos(x*.y/.400.) in
+      let f x  y = (cos((x -. 400.) /. 400.) +. cos((y -. 400.) /. 400.) ) in
       for k=0 to nb-1 do
       let x_point = (Random.float(x_max))
       and y_point  = (Random.float(y_max)) in
