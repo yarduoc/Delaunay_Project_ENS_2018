@@ -9,10 +9,6 @@ open Changement
 open Stepbystepmorphism
 open Display
 
-(* Functions yet to be imported or implemented *)
-let sleep k =
-    for l = 0 to (k*10000000) do () done
-;;
 
 (* Random function *)
 
