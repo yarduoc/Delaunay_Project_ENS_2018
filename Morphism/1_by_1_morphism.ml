@@ -12,6 +12,7 @@ let init_ind l =
     !res_ind_set
 ;;
 
+
 let point_to_morph p_set =
     let res_set = ref (empty()) in
     let ind = ref 1 in
@@ -40,36 +41,28 @@ let morph_fun morph_set ind =
     in iter morph_aux morph_set;
     !res_m_point;;
 
+let reci_morph_fun morph_set v_point =
+    let res_m_point = ref (car morph_set) in
+    let b = ref false in
+    let morph_aux curr_m_point =
+        let curr_point = fst curr_m_point in
+        if curr_point = v_point then (res_m_point := curr_m_point; b:= true)
+    in iter morph_aux morph_set;
+    if !b then
+        !res_m_point
+    else failwith "point not in set";;
 
-let nearest_morph_point morph_p_set mouse_point =
-    let res_point = ref (make_point (-.1.) (-.1.) ) in
-    let inf = ref (max_float) in
-    let is_min curr_point =
-        let p = fst(curr_point) in
-        let b = snd(curr_point) in
-        if b && (sqr_dist p mouse_point) < (!inf) then begin
-            inf := sqr_dist p mouse_point;
-            res_point := p
-        end
-    in iter is_min morph_p_set;
-    if !inf = max_float then
-        failwith "no more point"
-    else
-        !res_point
-;;
-
-
-
-let delta_set p_set delta =
+let delta_set p_set delta x_max y_max =
     let res_p_set = ref (empty()) in
     let delta_aux curr_m_point =
         let curr_point,ind = curr_m_point in
         let angle = Random.float (2.*.pi) in
         let dist = Random.float delta in
         let x,y = curr_point.x,curr_point.y in
-        let new_x = max 0. (((cos angle)*.dist)+.x) in
-        let new_y = max 0. (((sin angle)*.dist)+.y) in
-        let new_point = make_point new_x new_y
-        in res_p_set := cons !res_p_set (new_point,ind)
+        let new_x = min ( max 1. ((cos angle)*.dist+.x) ) (x_max-.1.)  in
+        let new_y = min ( max 1. ((sin angle)*.dist+.y) ) (y_max-.1.)  in
+        let new_point = make_point new_x new_y in
+        res_p_set := cons !res_p_set (new_point,ind)
     in iter delta_aux p_set;
-    !res_p_set;;
+    !res_p_set
+;;

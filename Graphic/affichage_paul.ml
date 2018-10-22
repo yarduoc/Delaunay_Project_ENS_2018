@@ -22,12 +22,13 @@ let wait_move t =
 
 let run_morph p_set1 =
     let t = ref 0. in
-    let p_set2 = delta_set p_set1 200. in
+    let p_set2 = delta_set p_set1 100. 1000. 800. in
     open_graph " 1000x800-0+0";
     while true do
         set_color black;
+        let to_draw = delaunay_morph_set p_set1 p_set2 !t 1000 800 in
         clear_graph ();
-        draw_triangle (delaunay_switch_set p_set1 p_set2 !t);
+        draw_triangle (to_draw);
         set_color blue;
         draw_point (morph_to_point p_set1);
         set_color green;
