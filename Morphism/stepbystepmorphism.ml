@@ -1,6 +1,8 @@
 (* m  stands for morphism*)
 
-open Pervasives;;
+open Pervasives
+open Alphaset
+open Pointtriangle
 
 let pi = 3.14159265;;
 

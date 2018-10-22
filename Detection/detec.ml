@@ -1,6 +1,6 @@
-(*open Pointtriangle
+open Pointtriangle
 open Alphaset
-open Matrix*)
+open Matrix
 
 (*Is the point in a circumcircle ?*)
 

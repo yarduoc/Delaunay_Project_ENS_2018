@@ -6,8 +6,8 @@ open Alphaset
 open Pointtriangle
 open Detec
 open Changement
-
-
+open Stepbystepmorphism
+open Display
 
 (* Functions yet to be imported or implemented *)
 let sleep k =
@@ -25,7 +25,7 @@ let rand_points nb x_max y_max =
 ;;
 
 let rand_m_points nb x_max y_max =
-    point_to_morph (rand_points nb x_max y_max);;
+    point_set_to_m_point_set (rand_points nb x_max y_max);;
 
 (* Triangle set initialisation with the frame triangles *)
 
@@ -67,76 +67,77 @@ let delaunay_stepwise point_set max_x max_y=
 
 let delaunay_default p_set = delaunay p_set 1000 800;;
 
-let delaunay_switch_set p_morph_set1 p_morph_set2 t =
+
+let delaunay_morph_set mp_set1 mp_set2 t max_x max_y =
+    (*verification de la bonne valeur de point list*)
     assert ( (t <= 1.) && (t >= 0.) );
-    let res_p_set = ref (empty()) in
-    let ind_set = init_ind (length p_morph_set1) in
-    let switch_set_aux curr_ind =
-        let p1 = fst (morph_fun p_morph_set1 curr_ind) in
-        let p2 = fst (morph_fun p_morph_set2 curr_ind) in
-        let new_x = (t*.p1.x) +. ((1.-.t)*.p2.x) in
-        let new_y = (t*.p1.y) +. ((1.-.t)*.p2.y) in
-        let new_point = make_point new_x new_y in
-        res_p_set := cons !res_p_set new_point
+    (* adds maximum points to the point list *)
+    let p1 = (make_morph_point 0. 0. (-1)) in
+    let p2 = (make_morph_point 0. max_y (-2)) in
+    let p3 = (make_morph_point max_x 0. (-3)) in
+    let p4 = (make_morph_point max_x max_y (-4)) in
+    let mp_set_max = cons (cons (cons (cons (empty()) p1) p2) p3) p4 in
+
+    let new_mp_set1 = concat mp_set_max mp_set1 in
+    let new_mp_set2 = concat mp_set_max mp_set2 in
+
+    (*Donne les coordonnées d'un point intermediaire à deux points*)
+    let middle_point p1 p2 t =
+        let new_x = (t *. p1.mx) +. ((1. -. t) *. p2.mx) in
+        let new_y = (t *. p1.my) +. ((1. -. t) *. p2.my) in
+        make_morph_point new_x new_y p1.label
     in
-    iter switch_set_aux ind_set;
-    delaunay_default !res_p_set;;
-
-
-let delaunay_morph_set p_m_set1 p_m_set2 t max_x max_y =
-    assert ( (t <= 1.) && (t >= 0.) );
-    let p1_max = ({x = 0.; y = 0.},-1) in
-    let p2_max = ({x = 0.; y = float_of_int max_y},-2) in
-    let p3_max = ({x = float_of_int max_x; y = 0.},-3) in
-    let p4_max = ({x = float_of_int max_x; y = float_of_int max_y},-4) in
-    let p_set_max = cons (cons (cons (cons (empty()) p1_max) p2_max) p3_max) p4_max in
-
-    let p_morph_set1 = concat p_set_max p_m_set1 in
-    let p_morph_set2 = concat p_set_max p_m_set2 in
-    let new_coord p1 p2 delta=
-        let new_x = (delta*.p1.x) +. ((1.-.delta)*.p2.x) in
-        let new_y = (delta*.p1.y) +. ((1.-.delta)*.p2.y) in
-        make_point new_x new_y
+    (*Donne le mp_set intermédiaire*)
+    let middle_mp_set m_p_set1 m_p_set2 =
+        let new_mp_set = ref (empty()) in
+        for label = 1 to length m_p_set1 do
+            print_string "test 1";
+            print_int label;
+            print_newline ();
+            let p1 = point_matching_label m_p_set1 label in
+            let p2 = point_matching_label m_p_set2 label in
+            new_mp_set := cons !new_mp_set (middle_point p1 p2 0.5)
+        done;
+        !new_mp_set
     in
-
-    let middle_m_set m_set1 m_set2 =
-        let res_m_set = ref (empty()) in
-        let middle ind =
-            let p1 = morph_fun m_set1 ind in
-            let p2 = morph_fun m_set2 ind in
-            res_m_set := cons !res_m_set ((new_coord (fst p1) (fst p2) 0.5),ind)
-        in iter middle (init_ind (length m_set1));
-        !res_m_set
-    in
-
-    let new_m_set = concat p_set_max (middle_m_set p_morph_set1 p_morph_set2) in
-    let middle_m_delaunay = delaunay_default (morph_to_point new_m_set) in
-    let res_triangle_set = ref (empty()) in
-
-    let morph_triangle_set curr_triangle =
+    (*middle_mp_set + points extremaux*)
+    let new_mp_set = concat mp_set_max (middle_mp_set mp_set1 mp_set2) in
+    (*delaunay du middle set*)
+    let middle_mp_delaunay = delaunay_default (morph_set_to_point_set new_mp_set) in
+    let morph_triangle_set = ref (empty()) in
+    (*foction qui a un triangle associe le nouveau*)
+    let get_triangle_set curr_triangle =
         let p1 = curr_triangle.p1 in
         let p2 = curr_triangle.p2 in
         let p3 = curr_triangle.p3 in
 
-        let ind1 = snd (reci_morph_fun new_m_set p1) in
-        let ind2 = snd (reci_morph_fun new_m_set p2) in
-        let ind3 = snd (reci_morph_fun new_m_set p3) in
+        let label1 = (point_matching_coordinates new_mp_set p1).label in
+        let label2 = (point_matching_coordinates new_mp_set p2).label in
+        let label3 = (point_matching_coordinates new_mp_set p3).label in
 
-        let set1_p1 = fst (morph_fun p_morph_set1 ind1) in
-        let set1_p2 = fst (morph_fun p_morph_set1 ind2) in
-        let set1_p3 = fst (morph_fun p_morph_set1 ind3) in
+        print_string "test 1";
+        print_newline ();
+        let set1_p1 = point_matching_label new_mp_set1 label1 in
+        let set1_p2 = point_matching_label new_mp_set1 label2 in
+        let set1_p3 = point_matching_label new_mp_set1 label3 in
 
-        let set2_p1 = fst (morph_fun p_morph_set2 ind1) in
-        let set2_p2 = fst (morph_fun p_morph_set2 ind2) in
-        let set2_p3 = fst (morph_fun p_morph_set2 ind3) in
+        print_string "test 2";
+        print_newline ();
 
-        let new_p1 = new_coord set1_p1 set2_p1 t in
-        let new_p2 = new_coord set1_p2 set2_p2 t in
-        let new_p3 = new_coord set1_p3 set2_p3 t in
+        let set2_p1 = point_matching_label new_mp_set2 label1 in
+        let set2_p2 = point_matching_label new_mp_set2 label2 in
+        let set2_p3 = point_matching_label new_mp_set2 label3 in
 
-        let new_triangle = make_triangle new_p1 new_p2 new_p3 in
-        res_triangle_set := cons !res_triangle_set new_triangle
+        print_string "test 3";
+        print_newline ();
 
-    in iter morph_triangle_set  middle_m_delaunay;
-    !res_triangle_set
+        let new_p1 = middle_point set1_p1 set2_p1 t in
+        let new_p2 = middle_point set1_p2 set2_p2 t in
+        let new_p3 = middle_point set1_p3 set2_p3 t in
+
+        let new_triangle = make_triangle (morph_point_to_point new_p1) (morph_point_to_point new_p2) (morph_point_to_point new_p3) in
+        morph_triangle_set := cons !morph_triangle_set new_triangle
+
+    in iter get_triangle_set  middle_mp_delaunay;
+    !morph_triangle_set
 ;;
