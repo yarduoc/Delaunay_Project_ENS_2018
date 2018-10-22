@@ -176,7 +176,9 @@ let rec draw_line l_set =
         let curr_t = make_triangle_3D p1 p2 p2 in
         t_set := cons (!t_set) curr_t
     in iter draw_line_aux l_set;
-    draw_triangle_set_3D (!t_set);;
+    draw_triangle_set_3D (!t_set) 800 600 ;
+    synchronize ()
+;;
 
 
 let clear_display () = clear_graph();;
