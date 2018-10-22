@@ -8,6 +8,7 @@ open Graphics;;
 #use "Detection3D/matrix.ml";;
 #use "Detection3D/detec.ml";;
 #use "Change3D/changement.ml";;
+#use "calculus.ml";;
 #use "Graphic3D/display3D.ml";;
 
 (*
@@ -34,11 +35,27 @@ let rec projection (p_set : point set) =
 
   let rand_points_3D nb x_max y_max z_max =   (*Is 3D*)
       let sortie = ref (empty ()) in
-      let f x  y = 12. *. cos((x*.x +. y*.y)/.4.) /. (3. +. x*.x +. y*.y) in
+      let f x  y = 100.*.cos(x*.y/.400.) in
       for k=0 to nb-1 do
       let x_point = (Random.float(x_max))
       and y_point  = (Random.float(y_max)) in
           sortie := (cons (!sortie) (make_point_3D  x_point y_point (f x_point y_point)))
+      done;
+      !sortie
+  ;;
+
+
+  let generate_points_3D nb x_max y_max z_max =   (*Is 3D*)
+      let sortie = ref (empty ()) in
+      let x_step = x_max /. (float_of_int nb) in
+      let y_step = y_max /. (float_of_int nb) in
+      let f x  y = 20. *. sin( (x +. y) /. 3000.) in
+      for i=0 to nb-1 do
+        for j=0 to nb-1 do
+          let x_point = 0.01 +. float_of_int(i) *. x_step in
+          let y_point  = 0.01 +. float_of_int(j) *. y_step in
+          sortie := (cons (!sortie) (make_point_3D  x_point y_point (f x_point y_point)))
+        done;
       done;
       !sortie
   ;;
@@ -68,14 +85,9 @@ let rec projection (p_set : point set) =
       !t_set
   ;;
 
-  init_display 1001 800;;
-  let points_3D  = (rand_points_3D 500 1000. 800. 100.);;
-  let p_set_3D = delaunay3D points_3D 1001 801 100;;
+  init_display 800 800;;
 
-
-  sleep(100);;
-
-let p_set = rand_points_3D 0 1000. 800. 100. ;;
-let t_set = delaunay3D p_set 1000 800 100;;
+let p_set = generate_points_3D 50 800. 800. 100. ;;
+let t_set = delaunay3D p_set 800 800 100;;
 
 draw_triangle_3D t_set;;

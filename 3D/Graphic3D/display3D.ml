@@ -25,6 +25,18 @@ let triangle_to_int_array triangle =
    point_to_int_triple triangle.p3
 |];;
 
+let point_to_float_triple point =
+( (point.x),
+  (point.y),
+  (point.z)
+);;
+
+let triangle_to_float_array triangle =
+[| point_to_float_triple triangle.p1;
+   point_to_float_triple triangle.p2;
+   point_to_float_triple triangle.p3
+|];;
+
 let point_to_int_double point =
 ( (int_of_float point.x),
   (int_of_float point.y)
@@ -63,21 +75,21 @@ let rec draw_point_3D p_set =
         end
 ;;
 
+
 let slope_3d point_array =
-    let (x1,y1,z1)= point_array.(0) in
-    let (x2,y2,z2)= point_array.(1) in
-    let (x3,y3,z3)= point_array.(2) in
+    let p1 = point_array.(0) in
+    let p2 = point_array.(1) in
+    let p3 = point_array.(2) in
 
-      let z_min = min (z1) (min z2 z3 ) in
-      let z_max = max (z1) (max z2 z3 ) in
+      let vect1 = vect p1 p2 in
+      let vect2 = vect p1 p3 in
+      let uz = (0., 0., 1.) in
 
-      let y_min = min (y1) (min y2 y3 ) in
-      let y_max = max (y1) (max y2 y3 ) in
+        let normale = prod_vect vect1 vect2 in
 
-      let x_min = min (x1) (min x2 x3 ) in
-      let x_max = max (x1) (max x2 x3 ) in
-      max (abs (int_of_float(atan (float_of_int ((z_max - z_min)/(x_max - x_min))) /. 3.1415926535)))
-          (abs (int_of_float(atan (float_of_int( (z_max - z_min)/(y_max - y_min))) /. 3.1415926535))) ;;
+          (2./.3.1415926535)*.(asin (norme (prod_vect uz normale) /. (norme normale)));;
+
+
 
 
 
@@ -87,11 +99,12 @@ let rec draw_triangle_3D t_set =
     else
         let curr_triangle = car t_set in
         let other_triangles = cdr t_set in
-        let triangle_i = triangle_to_int_array curr_triangle in
         let projected_triangle_i = projected_triangle_to_int_array curr_triangle in
-        let slope_factor = slope_3d triangle_i in
+        let slope_factor = slope_3d (triangle_to_float_array curr_triangle) in
+        let part_red = 255 - (int_of_float(slope_factor*.255.)) in
+        let color = rgb part_red 0 0 in
         begin
-            set_color(rgb (slope_factor*255) 0 0);
+            set_color (color);
             draw_poly  projected_triangle_i;
             fill_poly  projected_triangle_i;
             draw_triangle_3D other_triangles

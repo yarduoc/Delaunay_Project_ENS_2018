@@ -1,11 +1,17 @@
-#use "../common/pointtriangle.ml";;
-#use "../common/alphaset.ml";;
-#load "graphics.cma";;
+let prod_vect (x1,x2,x3) (y1,y2,y3) =
+  let z1 = x2*.y3 -. x3*.y2 in
+  let z2 = x3*.y1 -. x1*.y3 in
+  let z3 = x1*.y2 -. x2*.y1 in
 
-open Graphics;;
+  (z1,z2,z3);;
 
-let norme x y = sqrt ((x)*.(x) +. (y)*.(y));;
+let norme (x,y,z) = sqrt ((x)*.(x) +. (y)*.(y) +. z*.z);;
 
+let vect (a1,a2,a3) (b1,b2,b3) =
+    (b1 -. a1, b2 -. a2, b3 -. a3);;
+
+
+(*
 let circumcenter p1 p2 p3 =
   let d= 2.*.(p1.x*.(p2.y-.p3.y) +. p2.x*.(p3.y -. p1.y) +. p3.x*.(p1.y -. p2.y))
   in
@@ -35,3 +41,4 @@ let draw_triangle p1 p2 p3 =
     lineto (int_of_float(p3.x)) (int_of_float(p3.y));
     lineto (int_of_float(p1.x)) (int_of_float(p1.y));
     draw_circle (int_of_float(center_x)) (int_of_float(center_y)) radius;;
+*)
