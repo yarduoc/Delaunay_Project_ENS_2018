@@ -1,8 +1,8 @@
-open Alphaset
+(*open Alphaset
 open Pointtriangle
 open Graphics
 open Detec
-open Delaunay
+open Delaunay *)
 
 exception End;;
 let wait_move p_set =

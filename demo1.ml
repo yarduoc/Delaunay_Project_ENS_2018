@@ -1,5 +1,6 @@
 #use "common/main.ml";;
 
+
 Random.self_init();;
 
 init_display 1000 800;;
@@ -26,10 +27,11 @@ print_string "Appuyer sur q pour quitter.";;
 read_line();;
 
 init_display 1000 800;;
-
-run (rand_points 30 1000. 800.);;
+try
+    run (rand_points 30 1000. 800.);
+with _ -> ();;
 
 print_string "Appuyer sur la touche Entrée pour continuer";;
 read_line();;
-
-run_morph (rand_m_points 20 1000. 800.) ;;
+init_display 1000 800 ;;
+g();;
