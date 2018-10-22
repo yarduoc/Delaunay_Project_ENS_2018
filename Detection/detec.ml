@@ -1,6 +1,6 @@
-open Pointtriangle
+(*open Pointtriangle
 open Alphaset
-open Matrix
+open Matrix*)
 
 (*Is the point in a circumcircle ?*)
 
@@ -31,10 +31,10 @@ let in_circle (tri:triangle) (curr_point:point) =
 
 
 let to_modify_tri (tri_set:triangle set) (curr_point:point) =
-    let tri_list = ref [] in
+    let tri_list = ref (empty()) in
     let apply p tri =
         if in_circle tri p then
-            tri_list := tri::(!tri_list);
+            tri_list := cons (!tri_list) tri
     in iter (apply curr_point) tri_set;
     (!tri_list)
 ;;
