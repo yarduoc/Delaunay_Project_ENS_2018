@@ -1,16 +1,27 @@
+#load "graphics.cma";;
+
+open Graphics;;
+
 #use "../common/pointtriangle.ml";;
 #use "pointtriangle3D.ml";;
 #use "../common/alphaset.ml";;
+#use "Detection3D/matrix.ml";;
+#use "Detection3D/detec.ml";;
+#use "Change3D/changement.ml";;
+#use "calculus.ml";;
+#use "Graphic3D/display3D.ml";;
 
+(*
 let project_point_3D p_3D = make_point (p_3D.x) (p_3D.y);;
 
 let rec projection (p_set : point set) =
 
-  if is_empty projection
+  if is_empty p_set
     then empty()
     else cons (projection (cdr p_set)) (project_point_3D (car p_set))
   ;;
 
+*)
 
   let screen_width = ref 800;;
   let screen_height = ref 600;;
@@ -24,8 +35,27 @@ let rec projection (p_set : point set) =
 
   let rand_points_3D nb x_max y_max z_max =   (*Is 3D*)
       let sortie = ref (empty ()) in
+      let f x  y = 100.*.cos(x*.y/.400.) in
       for k=0 to nb-1 do
-          sortie := (cons (!sortie) (make_point_3D (Random.float(x_max)) (Random.float(y_max))) (Random.float(z_max)))
+      let x_point = (Random.float(x_max))
+      and y_point  = (Random.float(y_max)) in
+          sortie := (cons (!sortie) (make_point_3D  x_point y_point (f x_point y_point)))
+      done;
+      !sortie
+  ;;
+
+
+  let generate_points_3D nb x_max y_max z_max =   (*Is 3D*)
+      let sortie = ref (empty ()) in
+      let x_step = x_max /. (float_of_int nb) in
+      let y_step = y_max /. (float_of_int nb) in
+      let f x  y =  (cos((x -. 400.) /. 400.) +. cos((y -. 400.) /. 400.) )in
+      for i=0 to nb-1 do
+        for j=0 to nb-1 do
+          let x_point = 0.01 +. float_of_int(i) *. x_step in
+          let y_point  = 0.01 +. float_of_int(j) *. y_step in
+          sortie := (cons (!sortie) (make_point_3D  x_point y_point (f x_point y_point)))
+        done;
       done;
       !sortie
   ;;
@@ -39,7 +69,7 @@ let rec projection (p_set : point set) =
       let p4_max = make_point_3D (float_of_int max_x) (float_of_int max_y) 0. in
       let t_set =   cons
                     (cons (empty()) (make_triangle_3D p1_max p2_max p3_max))
-                    (make_point_3D p3_max p2_max p4_max)
+                    (make_triangle_3D p3_max p2_max p4_max)
 
       in t_set
   ;;
@@ -55,9 +85,9 @@ let rec projection (p_set : point set) =
       !t_set
   ;;
 
-  init_display 1001 800;;
-  let points_3D  = (rand_points_3D 500 1000. 800. 100.);;
-  let p_set_3D = delaunay_3D points_3D 1001 801 100;;
+  init_display 800 800;;
 
+let p_set = generate_points_3D 50 800. 800. 100. ;;
+let t_set = delaunay3D p_set 800 800 100;;
 
-  sleep(100);;
+draw_triangle_set_3D t_set 800 800;;

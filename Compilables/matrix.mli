@@ -1,4 +1,4 @@
-type 'a matrix = 'a array array
+type 'a matrix 
 val create_matrix_3x3 : unit -> float matrix
 val indice : 'a matrix -> int -> int -> 'a
 val det_2 : float matrix -> float

@@ -9,8 +9,12 @@ type triangle = { p1 : point; p2 : point ; p3 : point};;
 type point_set = point list;;
 type triangle_set = triangle list;;
 
-let make_triangle a b c = {p1 = a; p2 = b; p3 = c};;
-let make_point a b = {x = a; y = b};;
+open Graphics;;
+open Alphaset;;
+open Pointtriangle;;
+open Display;;
+open Detec;;
+open Changement;;
 
 let print_point point =
     print_string "(";
@@ -49,23 +53,18 @@ let ord_points p1 p2 =
 
 
 (* Functions yet to be imported or implemented *)
-let sleep k = let p = ref 0 in
-    for l = 0 to (k*10000000) do p:= 1 done
+let sleep k =
+    for l = 0 to (k*10000000) do () done
 ;;
 
 (* Random function *)
 
 let rand_points nb x_max y_max =
-    let ord p1 p2 =
-        if p1.x = p2.x then
-            p1.y < p2.y
-        else p1.x < p2.x
-    in
-    let sortie = ref [] in
+    let sortie = ref (empty ()) in
     for k=0 to nb-1 do
-        sortie := (make_point (Random.float(x_max)) (Random.float(y_max)))::(!sortie)
+        sortie := (cons (!sortie) (make_point (Random.float(x_max)) (Random.float(y_max))))
     done;
-    sort ord !sortie
+    !sortie
 ;;
 
 let rand_m_points nb x_max y_max =
@@ -107,8 +106,8 @@ let delaunay_stepwise point_set max_x max_y=
         p_set := cdr !p_set;
         draw_triangle !(t_set);
         draw_point point_set;
-        sleep 5;
     done;
+    !t_set
 ;;
 
 let delaunay_default p_set = delaunay p_set 1000 800;;
@@ -215,11 +214,17 @@ let test_debug n =
             draw_triangle !(t_set);
             draw_point point_set;
             debug (!t_set) (car !p_set);
-            sleep 10;
         done;
         !t_set
     in delaunay_stepwiset
 ;;
 
+
 #use "Graphic/mouse_test.ml";;
 #use "Graphic/affichage_paul.ml";;
+init_display 1001 800;;
+let points  = (rand_points 500 1000. 800.);;
+draw_triangle (delaunay points 1001 801);;
+draw_point points;;
+
+sleep(100);;
