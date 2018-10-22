@@ -227,8 +227,8 @@ let delaunay_morph_set mp_set1 mp_set2 t max_x max_y =
 ;;
 
 
-let rset1 = rand_m_points 10 1000. 800.;;
-let rset2 = delta_set rset1 0. 1000. 800.;;
+let rset1 = rand_m_points 200 1000. 800.;;
+let rset2 = delta_set rset1 250. 1000. 800.;;
 let f t = delaunay_morph_set rset1 rset2 t 1000. 800.;;
 init_display 1000 800;;
 let g ()=
