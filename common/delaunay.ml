@@ -63,7 +63,7 @@ let delaunay_stepwise point_set max_x max_y=
         synchronize ();
     done;;
 
-let delaunay_default p_set = delaunay p_set 1000 800;;
+let delaunay_default p_set = delaunay p_set 800 600;;
 
 
 let delaunay_morph_set mp_set1 mp_set2 t max_x max_y =
@@ -144,10 +144,8 @@ let animated_morphprint () =
   do
     for k = 0 to 20
      do
-        print_string "plus"; print_newline();
         let t = (float_of_int k) /. 20. in
         let to_draw = f t in
-        print_string "plus1"; print_newline();
         clear_display ();
 
         draw_triangle to_draw;
@@ -158,7 +156,6 @@ let animated_morphprint () =
      done;
      for k = 20 downto 0
       do
-      print_string "moins";print_newline();
         let t = (float_of_int k) /. 20. in
         let to_draw = f t in
         clear_display ();

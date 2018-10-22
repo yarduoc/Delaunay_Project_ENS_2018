@@ -36,7 +36,7 @@ ocamlc -c -I Compilables -o Compilables/dynamic_display.cmo Graphic/dynamic_disp
 ocamlc -a  Compilables/matrix.cmo Compilables/alphaset.cmo Compilables/pointtriangle.cmo Compilables/detec.cmo -o Compilables/tools.cma
 ocamlc -a  Compilables/changement.cmo Compilables/stepbystepmorphism.cmo Compilables/display.cmo Compilables/delaunay.cmo Compilables/dynamic_display.cmo -o Compilables/uppertools.cma
 
-ocaml Compilables/demo1.ml 
-#ocaml Compilables/main.ml
 
-#ocaml 3D/project.ml
+ocaml Compilables/main.ml
+
+ocaml 3D/project.ml
