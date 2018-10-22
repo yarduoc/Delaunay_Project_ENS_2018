@@ -22,6 +22,12 @@ let rec find l x = match l with
     | _::t -> find t x
 ;;
 
+let rec find_pred f l = match l with
+    | [] -> failwith "No value verifying predicate"
+    | h::_ when f h -> h
+    | _::t -> find_pred f t
+;;
+
 let rec map f l = match l with
     | [] -> []
     | h::t -> (f h)::(map f t)
@@ -53,7 +59,8 @@ let rec sort ord l =
             else
                 l_sup := cons (!l_sup) curr_point
         in iter aux_sort (cdr l);
-    (sort ord !l_inf)@[f_point]@(sort ord !l_sup);;
+    (sort ord !l_inf)@[f_point]@(sort ord !l_sup)
+;;
 
 let rec ord_insert ord l a = match l with
     | [] -> [a]
