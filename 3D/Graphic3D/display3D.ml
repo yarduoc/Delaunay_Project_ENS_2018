@@ -189,11 +189,3 @@ let rec draw_line l_set =
 
 
 let clear_display () = clear_graph();;
-
-let debug t_set newpoint =
-    let t_set_to_modify = to_modify_tri t_set newpoint in
-    set_color red;
-    draw_triangle_set_3D t_set_to_modify;
-    set_color blue;
-    draw_point_3D (cons (empty()) newpoint);
-    set_color black;;

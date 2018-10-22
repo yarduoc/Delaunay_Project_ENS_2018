@@ -2,7 +2,7 @@ open Pointtriangle
 open Alphaset
 open Matrix
 
-
+(*Is the point in a circumcircle ?*)
 
 let is_counterclockwise (p1:point) (p2:point) (p3:point) =
     let matrice =[|
@@ -37,4 +37,40 @@ let to_modify_tri (tri_set:triangle set) (curr_point:point) =
             tri_list := tri::(!tri_list);
     in iter (apply curr_point) tri_set;
     (!tri_list)
+;;
+
+(*Where is the nearest point of the mouse ? *)
+
+let sqr_dist p1 p2 =
+    (p1.x -. p2.x)**2. +. (p1.y -. p2.y)**2.
+;;
+
+let nearest_point p_set mouse_point =
+    let res_point = ref (car p_set) in
+    let inf = ref (sqr_dist (car p_set) mouse_point) in
+    let is_min curr_point =
+        if (sqr_dist curr_point mouse_point) < (!inf) then begin
+            inf := sqr_dist curr_point mouse_point;
+            res_point := curr_point
+        end
+    in iter is_min p_set;
+    !res_point
+;;
+
+
+let nearest_morph_point morph_p_set mouse_point =
+    let res_point = ref (make_point (-.1.) (-.1.) ) in
+    let inf = ref (max_float) in
+    let is_min curr_point =
+        let p = fst(curr_point) in
+        let b = snd(curr_point) in
+        if b && (sqr_dist p mouse_point) < (!inf) then begin
+            inf := sqr_dist p mouse_point;
+            res_point := p
+        end
+    in iter is_min morph_p_set;
+    if !inf = max_float then
+        failwith "no more point"
+    else
+        !res_point
 ;;

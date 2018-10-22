@@ -1,7 +1,9 @@
 let screen_width = ref 800;;
-let screen_height = ref 600;;
+let screen_height = ref 800;;
 
-#use "common/alphaset.ml"
+#load "tools.cma";;
+#load "uppertools.cma";;
+#load "graphics.cma";;
 
 
 type point = {x: float; y: float};;

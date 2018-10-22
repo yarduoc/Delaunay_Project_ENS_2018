@@ -1,4 +1,3 @@
-#load "graphics.cma"
 open Graphics
 
 exception End;;

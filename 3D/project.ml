@@ -2,9 +2,9 @@
 
 open Graphics;;
 
-#use "../common/pointtriangle.ml";;
+#use "pointtriangle.ml";;
+#use "alphaset.ml";;
 #use "pointtriangle3D.ml";;
-#use "../common/alphaset.ml";;
 #use "Detection3D/matrix.ml";;
 #use "Detection3D/detec.ml";;
 #use "Change3D/changement.ml";;
