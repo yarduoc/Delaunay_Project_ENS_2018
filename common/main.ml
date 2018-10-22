@@ -240,7 +240,6 @@ let g ()=
         if s.keypressed then failwith "sortie_de_boucle";
     done
 ;;
-
 #use "Graphic/mouse_test.ml";;
 
 
@@ -266,7 +265,7 @@ let color_delaunay_morph_set cmp_set1 cmp_set2 t x_max y_max =
         let new_y = (t *. p1.my) +. ((1. -. t) *. p2.my) in
         make_morph_point new_x new_y p1.label
     in
-    (* *)
+    (* Color management*)
     let middle_color col1 col2 t =
         let r1,g1,b1 = col1 in
         let r2,g2,b2 = col2 in
@@ -276,6 +275,13 @@ let color_delaunay_morph_set cmp_set1 cmp_set2 t x_max y_max =
         new_r,new_g,new_b;
     in
 
+    let avg_triple col1 col2 col3 =
+    let r1,g1,b1 = col1 in
+    let r2,g2,b2 = col2 in
+    let r3,g3,b3 = col3 in
+    (r1+r2+r3)/3,(g1+g2+g3)/3,(b1+b2+b3)/3;
+
+    in
     (*Donne le mp_set intermédiaire*)
     let middle_mp_set m_p_set1 m_p_set2 =
         let new_mp_set = ref (empty()) in
@@ -328,8 +334,8 @@ let color_delaunay_morph_set cmp_set1 cmp_set2 t x_max y_max =
         let new_p3 = middle_point set1_p3 set2_p3 t in
 
         let new_triangle = make_triangle (morph_point_to_point new_p1) (morph_point_to_point new_p2) (morph_point_to_point new_p3) in
-        morph_triangle_set := cons !morph_triangle_set (new_triangle,new_color)
+        morph_ctriangle_set := cons !morph_triangle_set (new_triangle,new_color)
 
     in iter get_triangle_set  middle_mp_delaunay;
-    !morph_triangle_set
+    !morph_ctriangle_set
 ;;
