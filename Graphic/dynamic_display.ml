@@ -38,6 +38,7 @@ let wait_move p_set =
                                         clear_graph ();
                                         draw_triangle affiche;
                                         draw_point !p_set;
+                                        synchronize ();
                                     end
                 done;
                 end;
