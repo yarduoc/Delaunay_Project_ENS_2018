@@ -1,5 +1,5 @@
 
-#Delaunay Triangulation 
+## Delaunay Triangulation 
 
 This OCaml Package was develloped for the first project of the Porg1 class. This
 OCaml Package allows you to triangulate a set of points using Delaunay
