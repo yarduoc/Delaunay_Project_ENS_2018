@@ -1,28 +1,28 @@
 
-## Delaunay Triangulation 
+# Delaunay Triangulation 
 
 This OCaml Package was develloped for the first project of the Porg1 class. This
 OCaml Package allows you to triangulate a set of points using Delaunay
 triangulation.
 
-# Build status 
+## Build status 
 
 This project is over, final version is released.
 
-# Requirements 
+## Requirements 
 
 This library was develloped using OCaml 4.07.0. so we recommend to use it with
 this version or higher although it might work with older versions.
 Graphic and Unix ocaml libraries are also used in this library
 
-# Build Instructions 
+## Build Instructions 
 
 Unzip the archive BastideCoudrayDesauw.zip
 Run the command sh compile.sh
 You can now use the BCD_1.cma and BCD_2.cma archives
 You can also run sh demo.sh to have a demonstration of different features.
 
-# Features 
+## Features 
 
 This library is featuring various implementations using Delaunay triangulation.
 
@@ -64,11 +64,11 @@ This library is featuring various implementations using Delaunay triangulation.
     point -> point -> point -> triangle
 
 
-# Code Example 
+## Code Example 
 
 You can find a code example on the demo.sh file
 
-# Credits 
+## Credits 
 
 This project was develloped by Paul Bastide, Alex Coudray and Lauric Dessauw.
 The Suject of this project was given by Luc Bougé, Teacher at the ENS Rennes
