@@ -1,3 +1,5 @@
+(*© Copyright Paul Bastide, Alex Coudray, Lauric Desauw 25/04/2019 CC-BY 4.0*)
+
 let screen_width = ref 800;;
 let screen_height = ref 800;;
 
@@ -59,7 +61,7 @@ let delaunay_stepwise point_set max_x max_y=
         p_set := cdr !p_set;
         draw_triangle !(t_set);
         draw_point point_set;
-        sleep 1;
+
         synchronize ();
     done;;
 

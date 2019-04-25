@@ -1,3 +1,4 @@
+(*© Copyright Paul Bastide, Alex Coudray, Lauric Desauw 25/04/2019 CC-BY 4.0*)
 type 'a set
 val empty : unit -> 'a set
 val cons : 'a set -> 'a -> 'a set

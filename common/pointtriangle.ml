@@ -1,3 +1,5 @@
+(*© Copyright Paul Bastide, Alex Coudray, Lauric Desauw 25/04/2019 CC-BY 4.0*)
+
 open Alphaset
 
 type point = {x: float; y: float};;

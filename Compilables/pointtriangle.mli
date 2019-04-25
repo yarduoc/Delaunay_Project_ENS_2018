@@ -1,3 +1,5 @@
+(*© Copyright Paul Bastide, Alex Coudray, Lauric Desauw 25/04/2019 CC-BY 4.0*)
+
 type point
 type triangle
 type morph_point
@@ -18,4 +20,4 @@ val print_point : point -> unit
 val print_triangle : triangle -> unit
 val print_triangle_set : triangle_set -> unit
 val ord_points : point -> point -> bool
-val ord_m_points : morph_point -> morph_point -> bool 
+val ord_m_points : morph_point -> morph_point -> bool

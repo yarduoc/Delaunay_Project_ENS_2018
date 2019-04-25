@@ -1,3 +1,5 @@
+(*© Copyright Paul Bastide, Alex Coudray, Lauric Desauw 25/04/2019 CC-BY 4.0*)
+
 type 'a matrix = 'a array array
 val create_matrix_3x3 : unit -> float matrix
 val indice : 'a matrix -> int -> int -> 'a

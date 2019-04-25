@@ -37,7 +37,7 @@ let mini a_set =
     end;
     in
     min_aux a_set (car a_set);;
-(*
+
 let circumcenter p1 p2 p3 =
   let d= 2.*.(p1.x*.(p2.y-.p3.y) +. p2.x*.(p3.y -. p1.y) +. p3.x*.(p1.y -. p2.y))
   in
@@ -56,10 +56,13 @@ let circumcenter p1 p2 p3 =
 
 let circumradius p1 p2 p3 =
   let (center_x,center_y) = circumcenter p1 p2 p3 in
-      norme (center_x -. p1.x) (center_y -. p1.y);;
+      norme ((center_x -. p1.x),(center_y -. p1.y),0.);;
 
 
-let draw_triangle p1 p2 p3 =
+let draw_triangle tri =
+  let p1 = tri.p1
+  and p2 = tri.p2
+  and p3 = tri.p3 in
   let (center_x,center_y) = circumcenter p1 p2 p3 in
   let radius = int_of_float(circumradius p1 p2 p3) in
     moveto (int_of_float(p1.x)) (int_of_float(p1.y));
@@ -67,4 +70,3 @@ let draw_triangle p1 p2 p3 =
     lineto (int_of_float(p3.x)) (int_of_float(p3.y));
     lineto (int_of_float(p1.x)) (int_of_float(p1.y));
     draw_circle (int_of_float(center_x)) (int_of_float(center_y)) radius;;
-*)

@@ -1,3 +1,5 @@
+(*© Copyright Paul Bastide, Alex Coudray, Lauric Desauw 25/04/2019 CC-BY 4.0*)
+
 type 'a matrix = 'a array array;;
 
 (*Builders and modifiers*)

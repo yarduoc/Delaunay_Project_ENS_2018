@@ -11,11 +11,12 @@ open Graphics;;
 #use "Change3D/changement.ml";;
 #use "calculus.ml";;
 #use "Graphic3D/display3D.ml";;
+#use "calculus.ml";;
   (* Random function *)
 
   let rand_points_3D nb x_max y_max z_max =   (*Is 3D*)
       let sortie = ref (empty ()) in
-      let f x  y = 1400. *. (cos((x -. 400.) /. 400.) +. cos((y -. 400.) /. 400.) ) in
+      let f x  y = 500. *. (cos((x -. 400.) ) +. cos((y -. 400.)) ) in
       for k=0 to nb-1 do
       let x_point = (Random.float(x_max))
       and y_point  = (Random.float(y_max)) in
@@ -67,10 +68,13 @@ open Graphics;;
 
   init_display 800 800;;
 
-let p_set = rand_points_3D 1000 800. 800. 100. ;;
+let p_set = rand_points_3D 15 800. 800. 100. ;;
+
 let t_set = delaunay3D p_set 800 800 100;;
 
-draw_triangle_set_3D t_set 800 800;;
+draw_point_3D p_set ;;
+(*line_triangle_set_3D t_set 800 800;;
+*)
 
 let _ = Graphics.wait_next_event [Key_pressed] in ();;
 

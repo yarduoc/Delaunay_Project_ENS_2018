@@ -169,6 +169,34 @@ let draw_triangle_set_3D t_set max_x max_y =
     draw_triangle_3D t_set
 ;;
 
+let line_triangle_set_3D t_set max_x max_y =
+  let angle_set = ref (empty()) in
+  let f_slope = slope_function t_set angle_set max_x max_y in
+  let rec draw_triangle_3D t_set =
+  begin
+      if is_empty t_set
+          then ()
+      else
+          let curr_triangle = car t_set in
+          let other_triangles = cdr t_set in
+
+          if not_extreme_tri curr_triangle max_x max_y
+          then
+            let projected_triangle_i = projected_triangle_to_int_array curr_triangle in
+            begin
+
+                draw_poly  projected_triangle_i;
+                draw_triangle_3D other_triangles;
+            end;
+
+          else
+          draw_triangle_3D other_triangles
+    end;
+    in
+    synchronize ();
+    draw_triangle_3D t_set
+;;
+
 let rec draw_line l_set =
     let t_set = ref (empty()) in
     let draw_line_aux curr_line =
